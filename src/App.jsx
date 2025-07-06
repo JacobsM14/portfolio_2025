@@ -767,7 +767,7 @@ function App() {
             <div className="mt-4 flex flex-col overflow-y-auto h-[calc(100%-2rem)]">
               {studies[language].map((study, index) => (
                 <div key={index} className="mb-2 text-xs">
-                  <h3 className="text-white font-bold">{study.degree}</h3>
+                  <p className="text-white font-bold">{study.degree}</p>
                   <p className="text-gray-light">{study.institution}</p>
                   <p className="text-gray-light">{study.duration}</p>
                 </div>
@@ -817,6 +817,7 @@ function App() {
                         <button
                           onClick={() => window.open(project.link, "_blank")}
                           style={{ cursor: "pointer" }}
+                          key={index + "link_" + project.title}
                           className="text-primary mt-2 flex items-center flex-start gap-1"
                         >
                           <svg
@@ -842,6 +843,7 @@ function App() {
                             window.open(project.repo, "_blank")
                           }
                           style={{ cursor: "pointer" }}
+                          key={index + "repo_" + project.title}
                           className="text-primary mt-2 flex items-center flex-start gap-1"
                         >
                           <svg
