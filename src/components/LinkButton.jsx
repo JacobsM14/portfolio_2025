@@ -1,4 +1,4 @@
-export default function LinkButton({ type = "link", link, children }) {
+export default function LinkButton({ type = "link", link, children, onClick }) {
   const EMAIL = "marcel.eplu@gmail.com";
 
   const copyEmailToClipboard = async () => {
@@ -9,15 +9,26 @@ export default function LinkButton({ type = "link", link, children }) {
     }
   };
 
+  const handleClick = () => {
+    if (type === "link") {
+      window.open(link);
+    } else if (type === "cv") {
+      window.open(link, "_blank");
+    } else if (type === "email") {
+      copyEmailToClipboard();
+    } else {
+      window.open(link);
+    }
+    
+    // Execute the additional onClick callback if provided
+    if (onClick) {
+      onClick();
+    }
+  };
+
   return (
     <button
-      {...(type === "link"
-        ? { onClick: () => window.open(link) }
-        : type === "cv"
-        ? { onClick: () => window.open(link, "_blank") }
-        : type === "email"
-        ? { onClick: () => copyEmailToClipboard() }
-        : { onClick: () => window.open(link) })}
+      onClick={handleClick}
       className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
       style={{ cursor: "pointer" }}
     >

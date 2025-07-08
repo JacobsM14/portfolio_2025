@@ -39,18 +39,16 @@ function App() {
   const technologies = Technologies();
   const tools = Tools();
   const experiences = Experiences();
-
-  const disponibility = false;
-
   const [language, setLanguage] = useState("es");
+  const disponibility = false;
+  const length = 4;
+  const [book, setBooks] = useState({});
+  const [randomIndex, setRandomIndex] = useState(0);
+  const [mailCopied, setMailCopied] = useState(false);
 
   const handleLanguageChange = () => {
     setLanguage((prevLanguage) => (prevLanguage === "es" ? "en" : "es"));
   };
-
-  const length = 4;
-  const [book, setBooks] = useState({});
-  const [randomIndex, setRandomIndex] = useState(0);
 
   useEffect(() => {
     const randIndex = Math.floor(Math.random() * length);
@@ -61,9 +59,16 @@ function App() {
     setBooks(Books(language, randomIndex));
   }, [language, randomIndex]);
 
+  useEffect(() => {
+    if (mailCopied) {
+      const timer = setTimeout(() => setMailCopied(false), 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [mailCopied]);
+
   return (
     <>
-      <div className="w-screen min-h-screen bg-dark flex items-center justify-center">
+      <div className="w-screen min-h-screen bg-dark flex items-center justify-center relative xl:overflow-hidden">
         <div
           className="w-[98vw] max-w-[1400px] h-auto max-h-[90vh] grid grid-cols-1 grid-rows-none flex flex-col gap-4 p-2
           xl:w-[85%] xl:h-[85%]
@@ -139,7 +144,7 @@ function App() {
                 md:col-span-6 md:row-span-1 md:mb-0
               "
               >
-                <div className="scale-[90%]">
+                <div className="scale-[90%] w-full">
                   <GitHubCalendar
                     username="JacobsM14"
                     transformData={selectLastHalfYear}
@@ -152,21 +157,115 @@ function App() {
               </div>
               <div
                 className="col-span-1 row-span-1 bg-gradient-to-b from-indigo-500/10 to-blue-500/10 border-1 border-gray-normal rounded-3xl flex flex-row items-center justify-center gap-2 mb-2
-                md:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0
+                md:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0 py-2
               "
               >
                 {Object.values(socials).map((social, index) => (
-                  <LinkButton type={social.type} link={social.link} key={index}>
+                  <LinkButton
+                    type={social.type}
+                    link={social.link}
+                    key={index}
+                    {...(social.type === "email"
+                      ? { onClick: () => setMailCopied(true) }
+                      : {})}
+                  >
                     <social.icon />
                   </LinkButton>
                 ))}
               </div>
               <div
-                className="col-span-1 row-span-1 border-1 rounded-3xl border-gray-normal bg-green-400/10 flex items-center justify-center text-white mt-2
+                className=" hidden md:block col-span-1 row-span-1 border-1 rounded-3xl border-gray-normal bg-green-400/10 flex items-center justify-center text-white mt-2
                 md:col-span-6 md:row-span-1 md:mt-0
               "
               >
                 <Spotify />
+              </div>
+            </div>
+          </div>
+          <div
+            className="flex md:hidden col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl
+            md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden
+          "
+          >
+            <div className="flex flex-col h-full w-full">
+              <div className="flex gap-3 items-center pl-2 pt-2">
+                <span className="text-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m17.15 20.7l-6.05-6.1q-.5.2-1.012.3T9 15q-2.5 0-4.25-1.75T3 9q0-.9.25-1.712t.7-1.538L7.6 9.4l1.8-1.8l-3.65-3.65q.725-.45 1.538-.7T9 3q2.5 0 4.25 1.75T15 9q0 .575-.1 1.088t-.3 1.012l6.1 6.05q.3.3.3.725t-.3.725l-2.1 2.1q-.3.3-.725.3t-.725-.3"
+                    />
+                  </svg>
+                </span>
+                <p className="text-white font-bold">
+                  {Labels(language, "projects")}
+                </p>
+              </div>
+              <div className="flex w-full overflow-auto gap-4 p-3">
+                {Projects(language).map((project, index) => (
+                  <div
+                    key={index}
+                    className="text-sm p-2 border-1 border-gray-normal rounded-lg"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <p className="text-white font-bold">{project.title}</p>
+                      <div className="flex items-center gap-2">
+                        {project.link && (
+                          <button
+                            onClick={() => window.open(project.link, "_blank")}
+                            style={{ cursor: "pointer" }}
+                            key={index + "link_" + project.title}
+                            className="text-primary flex items-center flex-start gap-1"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="1.3em"
+                              height="1.3em"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4m-8-2l8-8m0 0v5m0-5h-5"
+                              />
+                            </svg>
+                            <span className="hidden">link</span>
+                          </button>
+                        )}
+                        {project.repo && (
+                          <button
+                            onClick={() => window.open(project.repo, "_blank")}
+                            style={{ cursor: "pointer" }}
+                            key={index + "repo_" + project.title}
+                            className="text-primary flex items-center flex-start gap-1"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="1.3em"
+                              height="1.3em"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+                              />
+                            </svg>
+                            <span className="hidden">git</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-gray-light py-4">{project.desc}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -176,7 +275,7 @@ function App() {
           "
           >
             {/* Technologies */}
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-3 xl:row-span-2 md:row-span-2 h-[calc(100%)] overflow-hidden">
+            <div className="col-span-1 row-span-1 h-fit border-1 border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-3 xl:row-span-2 md:row-span-2 md:h-[calc(100%)] overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
                 <div className="flex gap-3 items-center">
                   <span className="text-primary">
@@ -209,7 +308,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-2 md:row-span-2 overflow-hidden">
+            <div className="col-span-1 row-span-2 border-1 border-gray-normal rounded-3xl p-4 md:col-span-2 md:row-span-2 overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
                 <div className="flex items-center">
                   <span className="text-primary mr-2">
@@ -272,25 +371,22 @@ function App() {
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 flex flex-col gap-4 md:hidden xl:grid
+            className="grid grid-cols-2 col-span-1 row-span-1 flex flex-col gap-4 md:hidden xl:grid
             md:col-span-2 md:row-span-3 md:grid md:grid-cols-6 md:grid-rows-5 md:gap-4
           "
           >
             <div
-              className={`col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${
-                disponibility ? "bg-green-400/10" : "bg-red-400/10"
-              } md:col-span-3 md:row-span-2`}
+              className={`col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${disponibility ? "bg-green-400/10" : "bg-red-400/10"
+                } md:col-span-3 md:row-span-2`}
             >
               <div className="flex items-center justify-center gap-3">
                 <div
-                  className={`w-2 h-2 rounded-[100%] animate-pulse ${
-                    disponibility ? "bg-green-500" : "bg-red-600"
-                  }`}
+                  className={`w-2 h-2 rounded-[100%] animate-pulse ${disponibility ? "bg-green-500" : "bg-red-600"
+                    }`}
                 ></div>
                 <p
-                  className={`${
-                    disponibility ? "text-green-600" : "text-red-500"
-                  }`}
+                  className={`${disponibility ? "text-green-600" : "text-red-500"
+                    }`}
                 >
                   {disponibility
                     ? Labels(language, "goodDisponibility")
@@ -333,7 +429,7 @@ function App() {
                 ))}
               </div>
             </div>
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl overflow-hidden flex items-center justify-center md:col-span-3 md:row-span-3">
+            <div className="hidden md:flex col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl overflow-hidden  items-center justify-center md:col-span-3 md:row-span-3">
               {Donut()}
             </div>
           </div>
@@ -418,7 +514,7 @@ function App() {
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl
+            className="hidden md:flex col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl
             md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden
           "
           >
@@ -447,7 +543,7 @@ function App() {
                     key={index}
                     className="text-sm p-2 border-1 border-gray-normal rounded-lg"
                   >
-                    <div className="flex justify-between gap-2">
+                    <div className="flex items-center justify-between gap-2">
                       <p className="text-white font-bold">{project.title}</p>
                       <div className="flex items-center gap-2">
                         {project.link && (
@@ -455,7 +551,7 @@ function App() {
                             onClick={() => window.open(project.link, "_blank")}
                             style={{ cursor: "pointer" }}
                             key={index + "link_" + project.title}
-                            className="text-primary mt-2 flex items-center flex-start gap-1"
+                            className="text-primary flex items-center gap-1"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -480,7 +576,7 @@ function App() {
                             onClick={() => window.open(project.repo, "_blank")}
                             style={{ cursor: "pointer" }}
                             key={index + "repo_" + project.title}
-                            className="text-primary mt-2 flex items-center flex-start gap-1"
+                            className="text-primary flex items-center gap-1"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -517,7 +613,7 @@ function App() {
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 bg-gradient-to-br from-orange-500/10 to-yellow-500/10
+            className="hidden col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 bg-gradient-to-br from-orange-500/10 to-yellow-500/10
             md:col-span-2 md:row-span-3 md:hidden xl:block xl:col-span-2 xl:row-span-3 overflow-hidden
           "
           >
@@ -541,6 +637,14 @@ function App() {
               </div>
             </div>
           </div>
+        </div>
+        <div
+          className={`fixed bg-primary bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 text-center rounded-lg transition-all duration-500 ${mailCopied
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 translate-y-10 pointer-events-none"
+            }`}
+        >
+          <p>{Labels(language, "mailCopied")}</p>
         </div>
       </div>
     </>

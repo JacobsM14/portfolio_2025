@@ -168,6 +168,7 @@ export function Labels(lang, sec) {
         "Desarrollador web con experiencia en React y creación de apps móviles para Android e iOS.",
       country: "España",
       recentReading: "Lectura reciente",
+      mailCopied: "Mail copiado",
     },
     en: {
       technologies: "Technologies",
@@ -185,6 +186,7 @@ export function Labels(lang, sec) {
         "Web developer with experience in React and mobile app development for Android and iOS.",
       country: "Spain",
       recentReading: "Recent Reading",
+      mailCopied: "Mail copied",
     },
   };
   return labels[lang][sec] || labels.es[sec] || labels.es;
