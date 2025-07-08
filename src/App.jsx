@@ -1,20 +1,24 @@
 import "./index.css";
 import GitHubCalendar from "react-github-calendar";
-import Spotify from "./components/spotify";
-import Books from "./components/books";
-import CV from "./assets/cv.pdf";
-import { useEffect, useRef, useState } from "react";
+import Spotify from "./components/Spotify";
+import Books from "./components/Books";
+import LinkButton from "./components/LinkButton";
+import Socials from "./assets/icons/SocialIcons";
+import TechBase from "./components/TechBase";
+import { useEffect, useState } from "react";
+import Donut from "./components/Donut";
+import {
+  Technologies,
+  Tools,
+  Preferences,
+  Languages,
+  Experiences,
+  Studies,
+  Projects,
+  Labels
+} from "./components/Texts";
 
 function App() {
-  const EMAIL = "marcel.eplu@gmail.com";
-  const copyEmailToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(EMAIL);
-    } catch {
-      // Optionally, handle error here
-    }
-  };
-
   const selectLastHalfYear = (contributions) => {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth();
@@ -31,250 +35,13 @@ function App() {
       );
     });
   };
-
-  const technologies = [
-    "React",
-    "Node.js",
-    "Express",
-    "MySQL",
-    "Typescript",
-    "Tailwind CSS",
-    "Docker",
-    "Git",
-    "Javascript",
-    "HTML",
-    "CSS",
-    "C++",
-    "Java",
-  ];
-
-  const tools = ["VS Code", "Postman", "GitHub", "Figma", "Jira"];
-
-  const preferences = {
-    es: ["Hibrido", "Remoto", "Frontend", "Junior", "Parcial", "Completa"],
-    en: ["Hybrid", "Remote", "Frontend", "Full time", "Part time", "Junior"],
-  };
+  const socials = Socials();
+  const technologies = Technologies();
+  const tools = Tools();
+  const experiences = Experiences();
 
   const disponibility = false;
 
-  const languages = {
-    en: [
-      { lenguage: "Spanish", level: "Native" },
-      { lenguage: "Catalan", level: "Native" },
-      { lenguage: "English", level: "Advanced" },
-    ],
-    es: [
-      { lenguage: "Español", level: "Nativo" },
-      { lenguage: "Catalán", level: "Nativo" },
-      { lenguage: "Inglés", level: "Avanzado" },
-    ],
-  };
-
-  const experiences = [
-    {
-      company: "Escola Sagrada Familia",
-      position: "IT - Practicas",
-      duration: "2021 - 5 meses",
-    },
-    {
-      company: "Infinitum Projects",
-      position: "Web Developer - Practicas",
-      duration: "2023 - 6 meses",
-    },
-    {
-      company: "Fundraisers",
-      position: "Full Stack Developer",
-      duration: "Marzo 2025 - Actualidad",
-    },
-  ];
-
-  const studies = {
-    es: [
-      {
-        institution: "Jaume Viladoms",
-        degree: "Sistema Microinformático y Redes",
-        duration: "2020 - 2022",
-      },
-      {
-        institution: "Jaume Viladoms",
-        degree: "Desarrollo de Aplicaciones Web",
-        duration: "2022 - 2024",
-      },
-    ],
-    en: [
-      {
-        institution: "Jaume Viladoms",
-        degree: "Microcomputer Systems and Networks",
-        duration: "2020 - 2022",
-      },
-      {
-        institution: "Jaume Viladoms",
-        degree: "Web Application Development",
-        duration: "2022 - 2024",
-      },
-    ],
-  };
-
-  const projects = {
-    en: [
-      {
-        title: "Gymlogs",
-        link: "https://www.gymlogs.marcel14.dev/",
-        repo: "https://github.com/JacobsM14/GYMLOGS_FRONTEND",
-        desc: "Web application for managing workout routines and tracking progress.",
-        techs: ["React", "Bun", "MySQL", "Express", "Api"],
-        state: "Cancelled",
-      },
-      {
-        title: "CMD Portfolio",
-        link: "https://portfolio-84m83yc07-iljacobs-projects.vercel.app/",
-        repo: "https://github.com/JacobsM14/portfolio-cmd",
-        desc: "Before this portfolio, I built one in terminal style using React and Tailwind.",
-        techs: ["React", "Tailwind CSS", "Vite"],
-        state: "Cancelled",
-      },
-      {
-        title: "Fundraisers",
-        link: "https://we-apex.com/",
-        desc: "Gamified web application for managing fundraising campaigns.",
-        techs: ["React", "Tailwind CSS", "Express", "Golang"],
-        state: "In development",
-      },
-    ],
-    es: [
-      {
-        title: "Gymlogs",
-        link: "https://www.gymlogs.marcel14.dev/",
-        repo: "https://github.com/JacobsM14/GYMLOGS_FRONTEND",
-        desc: "Aplicación web para gestionar rutinas de entrenamiento y seguimiento de progresos.",
-        techs: ["React", "Bun", "MySQL", "Express", "Api"],
-        state: "Cancelado",
-      },
-      {
-        title: "CMD Portfolio",
-        link: "https://portfolio-84m83yc07-iljacobs-projects.vercel.app/",
-        repo: "https://github.com/JacobsM14/portfolio-cmd",
-        desc: "Antes de este portfolio, hice uno en modo terminal con React y Tailwind.",
-        techs: ["React", "Tailwind CSS", "Vite"],
-        state: "Cancelado",
-      },
-      {
-        title: "Fundraisers",
-        link: "https://we-apex.com/",
-        desc: "Aplicación web gamificada para gestionar campañas de recaudación de fondos.",
-        techs: ["React", "Tailwind CSS", "Express", "Golang"],
-        state: "En desarrollo",
-      },
-    ],
-  };
-
-  const labels = {
-    es: {
-      technologies: "Tecnologías",
-      tools: "Herramientas",
-      preferences: "Prefiero",
-      badDisponibility: "Ocupado",
-      badDisponibilityDesc: "Pero abierto a ofertas.",
-      goodDisponibility: "Disponible",
-      goodDisponibilityDesc: "Para nuevos proyectos.",
-      languages: "Idiomas",
-      experiences: "Experiencias",
-      studies: "Estudios",
-      projects: "Proyectos",
-      userDesc:
-        "Desarrollador web con experiencia en React y creación de apps móviles para Android e iOS.",
-      country: "España",
-      recentReading: "Lectura reciente",
-    },
-    en: {
-      technologies: "Technologies",
-      tools: "Tools",
-      preferences: "Preferences",
-      badDisponibility: "Busy",
-      badDisponibilityDesc: "But open to offers.",
-      goodDisponibility: "Available",
-      goodDisponibilityDesc: "For new projects.",
-      languages: "Languages",
-      experiences: "Experiences",
-      studies: "Studies",
-      projects: "Projects",
-      userDesc:
-        "Web developer with experience in React and mobile app development for Android and iOS.",
-      country: "Spain",
-      recentReading: "Recent Reading",
-    },
-  };
-
-  function DonutAscii() {
-    const preRef = useRef(null);
-
-    useEffect(() => {
-      let x = 1760,
-        z = 0,
-        y = 0;
-      let running = true;
-
-      const render = () => {
-        if (!running) return;
-        z += 0.07;
-        y += 0.03;
-        const a = [...new Array(x)].map((a, r) => (r % 80 === 79 ? "\n" : " "));
-        const r = new Array(x).fill(0);
-        const t = Math.cos(z),
-          e = Math.sin(z),
-          n = Math.cos(y),
-          o = Math.sin(y);
-        for (let s = 0; s < 6.28; s += 0.07) {
-          const c = Math.cos(s),
-            h = Math.sin(s);
-          for (let s2 = 0; s2 < 6.28; s2 += 0.02) {
-            const v = Math.sin(s2),
-              M = Math.cos(s2),
-              i = c + 2,
-              l = 1 / (v * i * e + h * t + 5),
-              p = v * i * t - h * e,
-              d = 0 | (40 + 30 * l * (M * i * n - p * o)),
-              m = 0 | (12 + 15 * l * (M * i * o + p * n)),
-              f =
-                0 |
-                (8 * ((h * e - v * c * t) * n - v * c * e - h * t - M * c * o)),
-              y2 = d + 80 * m;
-            if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > r[y2]) {
-              r[y2] = l;
-              a[y2] = ".,-~:;=!*#$@"[f > 0 ? f : 0];
-            }
-          }
-        }
-        if (preRef.current) {
-          preRef.current.innerText = a.join("");
-        }
-      };
-
-      const interval = setInterval(render, 50);
-
-      return () => {
-        running = false;
-        clearInterval(interval);
-      };
-    }, []);
-
-    return (
-      <pre
-        ref={preRef}
-        style={{
-          color: "#fff",
-          background: "transparent",
-          fontFamily: "monospace",
-          fontSize: "4px",
-          lineHeight: "4px",
-          margin: 0,
-          padding: 0,
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      />
-    );
-  }
   const [language, setLanguage] = useState("es");
 
   const handleLanguageChange = () => {
@@ -283,19 +50,16 @@ function App() {
 
   const length = 4;
   const [book, setBooks] = useState({});
-  const [randomIndex, setRandomIndex] = useState(
-    Math.floor(Math.random() * length)
-  );
+  const [randomIndex, setRandomIndex] = useState(0);
 
   useEffect(() => {
     const randIndex = Math.floor(Math.random() * length);
-    setBooks(Books(language, randIndex));
     setRandomIndex(randIndex);
   }, []);
 
   useEffect(() => {
     setBooks(Books(language, randomIndex));
-  }, [language]);
+  }, [language, randomIndex]);
 
   return (
     <>
@@ -346,7 +110,7 @@ function App() {
               </h1>
               <p className="text-gray-light">Full Stack Developer</p>
               <p className="text-white text-center w-[90%] md:text-sm">
-                {labels[language].userDesc}
+                {Labels(language, "userDesc")}
               </p>
               <div className="flex items-center justify-center gap-2 text-gray-light">
                 <svg
@@ -361,7 +125,7 @@ function App() {
                   />
                 </svg>
                 <p className="text-gray-light">
-                  Barcelona, {labels[language]["country"]}
+                  Barcelona, {Labels(language, "country")}
                 </p>
               </div>
             </div>
@@ -391,124 +155,11 @@ function App() {
                 md:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0
               "
               >
-                <button
-                  onClick={() => window.open("https://github.com/JacobsM14")}
-                  style={{ cursor: "pointer" }}
-                  title="github"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M20 10.25q0 3.351-1.908 6.027t-4.928 3.703q-.352.068-.514-.093a.54.54 0 0 1-.163-.4V16.67q0-1.295-.677-1.895a9 9 0 0 0 1.335-.24q.591-.16 1.223-.52a3.7 3.7 0 0 0 1.055-.888q.423-.528.69-1.402t.267-2.008q0-1.616-1.028-2.75q.48-1.214-.105-2.723q-.364-.12-1.054.147a7 7 0 0 0-1.198.587l-.495.32a9 9 0 0 0-2.5-.346a9 9 0 0 0-2.5.347a12 12 0 0 0-.553-.36q-.345-.214-1.088-.514q-.741-.3-1.12-.18q-.572 1.507-.09 2.722q-1.03 1.134-1.03 2.75q0 1.134.268 2.002q.267.867.683 1.401a3.5 3.5 0 0 0 1.048.894q.632.36 1.224.52q.593.162 1.335.241q-.52.48-.638 1.375a2.5 2.5 0 0 1-.586.2a3.6 3.6 0 0 1-.742.067q-.43 0-.853-.287q-.423-.288-.723-.834a2.1 2.1 0 0 0-.631-.694q-.384-.267-.645-.32l-.26-.04q-.273 0-.378.06t-.065.153a.7.7 0 0 0 .117.187a1 1 0 0 0 .17.16l.09.066q.287.135.567.508q.28.374.41.68l.13.307q.17.507.574.821q.404.315.872.4q.468.087.905.094q.436.006.723-.047l.299-.053q0 .507.007 1.188l.006.72q0 .24-.17.4q-.168.162-.52.094q-3.021-1.028-4.928-3.703Q0 13.6 0 10.25q0-2.79 1.341-5.145a10.1 10.1 0 0 1 3.64-3.73A9.6 9.6 0 0 1 10 0a9.6 9.6 0 0 1 5.02 1.375a10.1 10.1 0 0 1 3.639 3.73Q20 7.461 20 10.25"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => window.open("www.linkedin.com/in/m-esplugas")}
-                  style={{ cursor: "pointer" }}
-                  title="linkedin"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M13 21H9V9h4v2a4.618 4.618 0 0 1 3.525-1.763A4.5 4.5 0 0 1 21 13.75V21h-4v-6.75a2.265 2.265 0 0 0-2.247-1.944A1.815 1.815 0 0 0 13 14.25V21Zm-6 0H3V9h4v12ZM5 7a2 2 0 1 1 0-4a2 2 0 0 1 0 4Z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => {
-                    copyEmailToClipboard();
-                  }}
-                  style={{ cursor: "pointer" }}
-                  title="email"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M20 18h-2V9.25L12 13L6 9.25V18H4V6h1.2l6.8 4.25L18.8 6H20m0-2H4c-1.11 0-2 .89-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2"
-                    />
-                  </svg>
-                </button>
-                <button
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                  onClick={() => window.open(CV, "_blank")}
-                  style={{ cursor: "pointer" }}
-                  title="Open CV"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M249.18 328.324c-9.788 15.384-19.179 30.434-40.222 45.055c-11.256 7.89-37.164 23.306-73.99 23.306C64.709 396.685 8 345.605 8 255.801c0-78.486 53.345-140.486 128.466-140.486c30.434 0 57.474 10.521 77.387 26.304c18.414 14.65 27.038 29.304 34.563 42.456l-52.58 26.273c-3.762-8.626-8.29-17.649-19.913-27.406c-12.784-10.155-25.54-13.152-36.46-13.152c-42.821 0-65.364 39.825-65.364 84.145c0 58.238 29.7 87.143 65.364 87.143c34.563 0 48.48-24.042 57.474-39.426zm184.194-204.75H504l-92.037 265.22h-67.597l-90.904-265.22h70.625l54.843 188.6z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      "https://www.goodreads.com/user/show/179143029-jacob"
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                  title="goodreads"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="0.88em"
-                    height="1em"
-                    viewBox="0 0 448 512"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M299.9 191.2c5.1 37.3-4.7 79-35.9 100.7c-22.3 15.5-52.8 14.1-70.8 5.7c-37.1-17.3-49.5-58.6-46.8-97.2c4.3-60.9 40.9-87.9 75.3-87.5c46.9-.2 71.8 31.8 78.2 78.3M448 88v336c0 30.9-25.1 56-56 56H56c-30.9 0-56-25.1-56-56V88c0-30.9 25.1-56 56-56h336c30.9 0 56 25.1 56 56M330 313.2s-.1-34-.1-217.3h-29v40.3c-.8.3-1.2-.5-1.6-1.2c-9.6-20.7-35.9-46.3-76-46c-51.9.4-87.2 31.2-100.6 77.8c-4.3 14.9-5.8 30.1-5.5 45.6c1.7 77.9 45.1 117.8 112.4 115.2c28.9-1.1 54.5-17 69-45.2c.5-1 1.1-1.9 1.7-2.9c.2.1.4.1.6.2c.3 3.8.2 30.7.1 34.5c-.2 14.8-2 29.5-7.2 43.5c-7.8 21-22.3 34.7-44.5 39.5c-17.8 3.9-35.6 3.8-53.2-1.2c-21.5-6.1-36.5-19-41.1-41.8c-.3-1.6-1.3-1.3-2.3-1.3h-26.8c.8 10.6 3.2 20.3 8.5 29.2c24.2 40.5 82.7 48.5 128.2 37.4c49.9-12.3 67.3-54.9 67.4-106.3"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={() =>
-                    window.open(
-                      "https://steamcommunity.com/profiles/76561198357047569/ "
-                    )
-                  }
-                  style={{ cursor: "pointer" }}
-                  title="goodreads"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M12 2a10 10 0 0 1 10 10a10 10 0 0 1-10 10c-4.6 0-8.45-3.08-9.64-7.27l3.83 1.58a2.84 2.84 0 0 0 2.78 2.27c1.56 0 2.83-1.27 2.83-2.83v-.13l3.4-2.43h.08c2.08 0 3.77-1.69 3.77-3.77s-1.69-3.77-3.77-3.77s-3.78 1.69-3.78 3.77v.05l-2.37 3.46l-.16-.01c-.59 0-1.14.18-1.59.49L2 11.2C2.43 6.05 6.73 2 12 2M8.28 17.17c.8.33 1.72-.04 2.05-.84s-.05-1.71-.83-2.04l-1.28-.53c.49-.18 1.04-.19 1.56.03c.53.21.94.62 1.15 1.15c.22.52.22 1.1 0 1.62c-.43 1.08-1.7 1.6-2.78 1.15c-.5-.21-.88-.59-1.09-1.04zm9.52-7.75c0 1.39-1.13 2.52-2.52 2.52a2.52 2.52 0 0 1-2.51-2.52a2.5 2.5 0 0 1 2.51-2.51a2.52 2.52 0 0 1 2.52 2.51m-4.4 0c0 1.04.84 1.89 1.89 1.89c1.04 0 1.88-.85 1.88-1.89s-.84-1.89-1.88-1.89c-1.05 0-1.89.85-1.89 1.89"
-                    />
-                  </svg>
-                </button>
+                {Object.values(socials).map((social, index) => (
+                  <LinkButton type={social.type} link={social.link} key={index}>
+                    <social.icon />
+                  </LinkButton>
+                ))}
               </div>
               <div
                 className="col-span-1 row-span-1 border-1 rounded-3xl border-gray-normal bg-green-400/10 flex items-center justify-center text-white mt-2
@@ -546,17 +197,14 @@ function App() {
                     </svg>
                   </span>
                   <p className="text-white font-bold">
-                    {labels[language]["technologies"]}
+                    {Labels(language, "technologies")}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {technologies.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
-                    >
+                    <TechBase paddings={"px-3 py-1"} key={index}>
                       {tech}
-                    </span>
+                    </TechBase>
                   ))}
                 </div>
               </div>
@@ -578,17 +226,14 @@ function App() {
                     </svg>
                   </span>
                   <p className="text-white font-bold">
-                    {labels[language]["tools"]}
+                    {Labels(language, "tools")}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {tools.map((tool, index) => (
-                    <span
-                      key={index}
-                      className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
-                    >
+                    <TechBase paddings={"px-3 py-1"} key={index}>
                       {tool}
-                    </span>
+                    </TechBase>
                   ))}
                 </div>
               </div>
@@ -613,11 +258,11 @@ function App() {
                   </svg>
                 </span>
                 <p className="text-white font-bold">
-                  {labels[language]["languages"]}
+                  {Labels(language, "languages")}
                 </p>
               </div>
               <div className="flex flex-col gap-2 mt-4">
-                {languages[language].map((lang, index) => (
+                {Languages(language).map((lang, index) => (
                   <div key={index} className="flex gap-2 items-center">
                     <div className="w-1 h-1 bg-primary rounded-[100%]"></div>
                     <span className="text-white pl-2">{lang.lenguage}</span>
@@ -648,14 +293,14 @@ function App() {
                   }`}
                 >
                   {disponibility
-                    ? labels[language]["goodDisponibility"]
-                    : labels[language]["badDisponibility"]}
+                    ? Labels(language, "goodDisponibility")
+                    : Labels(language, "badDisponibility")}
                 </p>
               </div>
               <p className="text-gray-light text-sm text-center">
                 {disponibility
-                  ? labels[language]["goodDisponibilityDesc"]
-                  : labels[language]["badDisponibilityDesc"]}
+                  ? Labels(language, "goodDisponibilityDesc")
+                  : Labels(language, "badDisponibilityDesc")}
               </p>
             </div>
             <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-3 md:row-span-5">
@@ -674,11 +319,11 @@ function App() {
                   </svg>
                 </span>
                 <p className="text-white font-bold">
-                  {labels[language]["preferences"]}
+                  {Labels(language, "preferences")}
                 </p>
               </div>
               <div className="flex flex-col gap-2 mt-4">
-                {preferences[language].map((preference, index) => (
+                {Preferences(language).map((preference, index) => (
                   <div key={index} className="flex gap-2 items-center">
                     <div className="w-1 h-1 bg-primary rounded-[100%]"></div>
                     <span className="text-white text-sm pl-2">
@@ -689,7 +334,7 @@ function App() {
               </div>
             </div>
             <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl overflow-hidden flex items-center justify-center md:col-span-3 md:row-span-3">
-              {DonutAscii()}
+              {Donut()}
             </div>
           </div>
           <div
@@ -716,7 +361,7 @@ function App() {
                 </svg>
               </span>
               <p className="text-white font-bold">
-                {labels[language]["experiences"]}
+                {Labels(language, "experiences")}
               </p>
             </div>
             <div className="mt-4 flex flex-col gap-2 flex-wrap h-[calc(100%-2rem)] overflow-y-auto">
@@ -759,11 +404,11 @@ function App() {
                 </svg>
               </span>
               <p className="text-white font-bold">
-                {labels[language]["studies"]}
+                {Labels(language, "studies")}
               </p>
             </div>
             <div className="mt-4 flex flex-col overflow-y-auto h-[calc(100%-2rem)]">
-              {studies[language].map((study, index) => (
+              {Studies(language).map((study, index) => (
                 <div key={index} className="mb-2 text-xs">
                   <p className="text-white font-bold">{study.degree}</p>
                   <p className="text-gray-light">{study.institution}</p>
@@ -793,14 +438,14 @@ function App() {
                   </svg>
                 </span>
                 <p className="text-white font-bold">
-                  {labels[language]["projects"]}
+                  {Labels(language, "projects")}
                 </p>
               </div>
               <div className="flex gap-4 p-3">
-                {projects[language].map((project, index) => (
+                {Projects(language).map((project, index) => (
                   <div
                     key={index}
-                    className="text-sm p-1 border-1 border-gray-normal rounded-lg"
+                    className="text-sm p-2 border-1 border-gray-normal rounded-lg"
                   >
                     <div className="flex justify-between gap-2">
                       <p className="text-white font-bold">{project.title}</p>
@@ -856,12 +501,14 @@ function App() {
                     <p className="text-gray-light py-4">{project.desc}</p>
                     <div className="flex flex-wrap gap-1">
                       {project.techs.map((tech, techIndex) => (
-                        <span
+                        <TechBase
+                          paddings={"px-2 py-1"}
+                          margins={"mr-1"}
+                          texts={"text-xs"}
                           key={techIndex}
-                          className="bg-gray-light/40 text-white font-bold px-2 py-1 rounded-full text-xs mr-1"
                         >
                           {tech}
-                        </span>
+                        </TechBase>
                       ))}
                     </div>
                   </div>
@@ -876,7 +523,7 @@ function App() {
           >
             <div className="overflow-y-auto h-full">
               <p className="text-white font-bold">
-                {labels[language]["recentReading"]}
+                {Labels(language, "recentReading")}
               </p>
               <div className="flex items-center py-4 gap-3">
                 <img

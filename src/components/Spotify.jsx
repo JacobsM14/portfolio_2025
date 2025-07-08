@@ -1,4 +1,4 @@
-import Songs from "./songs";
+import Songs from "./Songs";
 import SpotifyLogo from "../assets/SpotfyLogo";
 import { useEffect, useState } from "react";
 export default function Spotify() {
