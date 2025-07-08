@@ -51,16 +51,8 @@ function App() {
   const tools = ["VS Code", "Postman", "GitHub", "Figma", "Jira"];
 
   const preferences = {
-    es: ["Remoto", "Mudable", "Frontend", "Full time", "Part time", "Junior"],
-    en: [
-      "Hybrid",
-      "Remote",
-      "Relocation",
-      "Frontend",
-      "Full time",
-      "Part time",
-      "Junior",
-    ],
+    es: ["Hibrido", "Remoto", "Frontend", "Junior", "Parcial", "Completa"],
+    en: ["Hybrid", "Remote", "Frontend", "Full time", "Part time", "Junior"],
   };
 
   const disponibility = false;
@@ -379,21 +371,23 @@ function App() {
             "
             >
               <div
-                className="col-span-1 row-span-1 bg-dark border-1 border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 text-white mb-2
+                className="col-span-1 row-span-1 bg-dark border-1 border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 text-white mb-2 overflow-hidden
                 md:col-span-6 md:row-span-1 md:mb-0
               "
               >
-                <GitHubCalendar
-                  username="JacobsM14"
-                  transformData={selectLastHalfYear}
-                  hideColorLegend
-                  labels={{
-                    totalCount: "{{count}} contributions",
-                  }}
-                />
+                <div className="scale-[90%]">
+                  <GitHubCalendar
+                    username="JacobsM14"
+                    transformData={selectLastHalfYear}
+                    hideColorLegend
+                    labels={{
+                      totalCount: "{{count}} contributions",
+                    }}
+                  />
+                </div>
               </div>
               <div
-                className="col-span-1 row-span-1 bg-primary/2 border-1 border-gray-normal rounded-3xl flex flex-row items-center justify-center gap-2 mb-2
+                className="col-span-1 row-span-1 bg-gradient-to-b from-indigo-500/10 to-blue-500/10 border-1 border-gray-normal rounded-3xl flex flex-row items-center justify-center gap-2 mb-2
                 md:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0
               "
               >
@@ -401,7 +395,7 @@ function App() {
                   onClick={() => window.open("https://github.com/JacobsM14")}
                   style={{ cursor: "pointer" }}
                   title="github"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -419,7 +413,7 @@ function App() {
                   onClick={() => window.open("www.linkedin.com/in/m-esplugas")}
                   style={{ cursor: "pointer" }}
                   title="linkedin"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -439,7 +433,7 @@ function App() {
                   }}
                   style={{ cursor: "pointer" }}
                   title="email"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -454,7 +448,7 @@ function App() {
                   </svg>
                 </button>
                 <button
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                   onClick={() => window.open(CV, "_blank")}
                   style={{ cursor: "pointer" }}
                   title="Open CV"
@@ -479,7 +473,7 @@ function App() {
                   }
                   style={{ cursor: "pointer" }}
                   title="goodreads"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -501,7 +495,7 @@ function App() {
                   }
                   style={{ cursor: "pointer" }}
                   title="goodreads"
-                  className="p-2 rounded-lg border-1 border-gray-normal text-white hover:bg-primary"
+                  className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -531,68 +525,72 @@ function App() {
           "
           >
             {/* Technologies */}
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-3 xl:row-span-2 md:row-span-2 h-[calc(100%)] overflow-y-auto">
-              <div className="flex gap-3 items-center">
-                <span className="text-primary">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="m7 8l-4 4l4 4m10-8l4 4l-4 4M14 4l-4 16"
-                    />
-                  </svg>
-                </span>
-                <p className="text-white font-bold">
-                  {labels[language]["technologies"]}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {technologies.map((tech, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
-                  >
-                    {tech}
+            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-3 xl:row-span-2 md:row-span-2 h-[calc(100%)] overflow-hidden">
+              <div className="flex flex-col overflow-y-auto h-full">
+                <div className="flex gap-3 items-center">
+                  <span className="text-primary">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m7 8l-4 4l4 4m10-8l4 4l-4 4M14 4l-4 16"
+                      />
+                    </svg>
                   </span>
-                ))}
+                  <p className="text-white font-bold">
+                    {labels[language]["technologies"]}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {technologies.map((tech, index) => (
+                    <span
+                      key={index}
+                      className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-2 md:row-span-2 overflow-y-auto">
-              <div className="flex items-center">
-                <span className="text-primary mr-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="1em"
-                    height="1em"
-                    viewBox="0 0 256 256"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M215.79 118.17a8 8 0 0 0-5-5.66L153.18 90.9l14.66-73.33a8 8 0 0 0-13.69-7l-112 120a8 8 0 0 0 3 13l57.63 21.61l-14.62 73.25a8 8 0 0 0 13.69 7l112-120a8 8 0 0 0 1.94-7.26M109.37 214l10.47-52.38a8 8 0 0 0-5-9.06L62 132.71l84.62-90.66l-10.46 52.38a8 8 0 0 0 5 9.06l52.8 19.8Z"
-                    />
-                  </svg>
-                </span>
-                <p className="text-white font-bold">
-                  {labels[language]["tools"]}
-                </p>
-              </div>
-              <div className="flex flex-wrap gap-2 mt-4">
-                {tools.map((tool, index) => (
-                  <span
-                    key={index}
-                    className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
-                  >
-                    {tool}
+            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 md:col-span-2 md:row-span-2 overflow-hidden">
+              <div className="flex flex-col overflow-y-auto h-full">
+                <div className="flex items-center">
+                  <span className="text-primary mr-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1em"
+                      height="1em"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M215.79 118.17a8 8 0 0 0-5-5.66L153.18 90.9l14.66-73.33a8 8 0 0 0-13.69-7l-112 120a8 8 0 0 0 3 13l57.63 21.61l-14.62 73.25a8 8 0 0 0 13.69 7l112-120a8 8 0 0 0 1.94-7.26M109.37 214l10.47-52.38a8 8 0 0 0-5-9.06L62 132.71l84.62-90.66l-10.46 52.38a8 8 0 0 0 5 9.06l52.8 19.8Z"
+                      />
+                    </svg>
                   </span>
-                ))}
+                  <p className="text-white font-bold">
+                    {labels[language]["tools"]}
+                  </p>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {tools.map((tool, index) => (
+                    <span
+                      key={index}
+                      className="bg-gray-light/40 text-white font-bold px-3 py-1 rounded-full text-sm"
+                    >
+                      {tool}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
             <div
@@ -775,129 +773,124 @@ function App() {
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 overflow-y-auto
-            md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3
+            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl
+            md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden
           "
           >
-            <div className="flex gap-3 items-center">
-              <span className="text-primary">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="1em"
-                  height="1em"
-                  viewBox="0 0 24 24"
-                >
-                  <g fill="none">
-                    <path d="m12 14l9-5l-9-5l-9 5z" />
-                    <path d="m12 14l6.16-3.422a12.1 12.1 0 0 1 .665 6.479A11.95 11.95 0 0 0 12 20.055a11.95 11.95 0 0 0-6.824-2.998a12.1 12.1 0 0 1 .665-6.479z" />
+            <div className="flex flex-col overflow-y-auto h-full">
+              <div className="flex gap-3 items-center pl-2 pt-2">
+                <span className="text-primary">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="1em"
+                    height="1em"
+                    viewBox="0 0 24 24"
+                  >
                     <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m12 14l9-5l-9-5l-9 5zm0 0l6.16-3.422a12.1 12.1 0 0 1 .665 6.479A11.95 11.95 0 0 0 12 20.055a11.95 11.95 0 0 0-6.824-2.998a12.1 12.1 0 0 1 .665-6.479zm-4 6v-7.5l4-2.222"
+                      fill="currentColor"
+                      d="m17.15 20.7l-6.05-6.1q-.5.2-1.012.3T9 15q-2.5 0-4.25-1.75T3 9q0-.9.25-1.712t.7-1.538L7.6 9.4l1.8-1.8l-3.65-3.65q.725-.45 1.538-.7T9 3q2.5 0 4.25 1.75T15 9q0 .575-.1 1.088t-.3 1.012l6.1 6.05q.3.3.3.725t-.3.725l-2.1 2.1q-.3.3-.725.3t-.725-.3"
                     />
-                  </g>
-                </svg>
-              </span>
-              <p className="text-white font-bold">
-                {labels[language]["projects"]}
-              </p>
-            </div>
-            <div className="mt-4 flex gap-4">
-              {projects[language].map((project, index) => (
-                <div
-                  key={index}
-                  className="text-sm p-1 border-1 border-gray-normal rounded-lg"
-                >
-                  <div className="flex justify-between gap-2">
-                    <p className="text-white font-bold">{project.title}</p>
-                    <div className="flex items-center gap-2">
-                      {project.link && (
-                        <button
-                          onClick={() => window.open(project.link, "_blank")}
-                          style={{ cursor: "pointer" }}
-                          key={index + "link_" + project.title}
-                          className="text-primary mt-2 flex items-center flex-start gap-1"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1.3em"
-                            height="1.3em"
-                            viewBox="0 0 24 24"
+                  </svg>
+                </span>
+                <p className="text-white font-bold">
+                  {labels[language]["projects"]}
+                </p>
+              </div>
+              <div className="flex gap-4 p-3">
+                {projects[language].map((project, index) => (
+                  <div
+                    key={index}
+                    className="text-sm p-1 border-1 border-gray-normal rounded-lg"
+                  >
+                    <div className="flex justify-between gap-2">
+                      <p className="text-white font-bold">{project.title}</p>
+                      <div className="flex items-center gap-2">
+                        {project.link && (
+                          <button
+                            onClick={() => window.open(project.link, "_blank")}
+                            style={{ cursor: "pointer" }}
+                            key={index + "link_" + project.title}
+                            className="text-primary mt-2 flex items-center flex-start gap-1"
                           >
-                            <path
-                              fill="none"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="2"
-                              d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4m-8-2l8-8m0 0v5m0-5h-5"
-                            />
-                          </svg>
-                          <span className="hidden">link</span>
-                        </button>
-                      )}
-                      {project.repo && (
-                        <button
-                          onClick={() =>
-                            window.open(project.repo, "_blank")
-                          }
-                          style={{ cursor: "pointer" }}
-                          key={index + "repo_" + project.title}
-                          className="text-primary mt-2 flex items-center flex-start gap-1"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="1.3em"
-                            height="1.3em"
-                            viewBox="0 0 24 24"
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="1.3em"
+                              height="1.3em"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="none"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M10 4H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4m-8-2l8-8m0 0v5m0-5h-5"
+                              />
+                            </svg>
+                            <span className="hidden">link</span>
+                          </button>
+                        )}
+                        {project.repo && (
+                          <button
+                            onClick={() => window.open(project.repo, "_blank")}
+                            style={{ cursor: "pointer" }}
+                            key={index + "repo_" + project.title}
+                            className="text-primary mt-2 flex items-center flex-start gap-1"
                           >
-                            <path
-                              fill="currentColor"
-                              d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
-                            />
-                          </svg>
-                          <span className="hidden">git</span>
-                        </button>
-                      )}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="1.3em"
+                              height="1.3em"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                fill="currentColor"
+                                d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2"
+                              />
+                            </svg>
+                            <span className="hidden">git</span>
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                    <p className="text-gray-light py-4">{project.desc}</p>
+                    <div className="flex flex-wrap gap-1">
+                      {project.techs.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="bg-gray-light/40 text-white font-bold px-2 py-1 rounded-full text-xs mr-1"
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
-                  <p className="text-gray-light py-4">{project.desc}</p>
-                  <div className="flex flex-wrap gap-1">
-                    {project.techs.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="bg-gray-light/40 text-white font-bold px-2 py-1 rounded-full text-xs mr-1"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <div
             className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 bg-gradient-to-br from-orange-500/10 to-yellow-500/10
-            md:col-span-2 md:row-span-3 md:hidden xl:block xl:col-span-2 xl:row-span-3
+            md:col-span-2 md:row-span-3 md:hidden xl:block xl:col-span-2 xl:row-span-3 overflow-hidden
           "
           >
-            <p className="text-white font-bold">
-              {labels[language]["recentReading"]}
-            </p>
-            <div className="flex items-center py-4 gap-3">
-              <img
-                src={book.cover}
-                alt={0 + "book"}
-                className="w-30 rounded-lg"
-              />
-              <div className="flex flex-col ">
-                <p className="text-white text-md font-bold pb-2">
-                  {book.title}
-                </p>
-                <p className="text-gray-light pb-1">{book.author}</p>
-                {/* <p className="text-gray-light text-sm">{book.description}</p> */}
+            <div className="overflow-y-auto h-full">
+              <p className="text-white font-bold">
+                {labels[language]["recentReading"]}
+              </p>
+              <div className="flex items-center py-4 gap-3">
+                <img
+                  src={book.cover}
+                  alt={0 + "book"}
+                  className="w-30 rounded-lg"
+                />
+                <div className="flex flex-col ">
+                  <p className="text-white text-md font-bold pb-2">
+                    {book.title}
+                  </p>
+                  <p className="text-gray-light pb-1">{book.author}</p>
+                  {/* <p className="text-gray-light text-sm">{book.description}</p> */}
+                </div>
               </div>
             </div>
           </div>

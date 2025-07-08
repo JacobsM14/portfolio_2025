@@ -7,6 +7,22 @@
   --color-gray-light: #999999;
 }
 
+*::-webkit-scrollbar-thumb {
+  background: var(--color-gray-light);
+  border-radius: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-light) transparent;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #a78bfa;
+}
+*::-webkit-scrollbar {
+  width: 2px;
+  background: var(--color-gray-normal);
+  border-radius: 4px;
+}
+
+
 body {
   background-color: var(--color-dark);
 }
@@ -60,6 +76,5 @@ body {
 
 /* Firefox */
 .overflow-scroll-vertical {
-  scrollbar-width: thin;
-  scrollbar-color: var(--color-gray-light) transparent;
+  
 }
