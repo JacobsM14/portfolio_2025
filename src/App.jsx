@@ -82,7 +82,7 @@ function App() {
           >
             <div>
               <h1 className="text-3xl font-bold text-primary">
-                Marcel portfolio
+                Marcel Portfolio
               </h1>
             </div>
             <div className="flex gap-2">
@@ -376,16 +376,16 @@ function App() {
           "
           >
             <div
-              className={`col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${disponibility ? "bg-green-400/10" : "bg-red-400/10"
+              className={`col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${disponibility ? "bg-green-400/10" : ""
                 } md:col-span-3 md:row-span-2`}
             >
               <div className="flex items-center justify-center gap-3">
                 <div
-                  className={`w-2 h-2 rounded-[100%] animate-pulse ${disponibility ? "bg-green-500" : "bg-red-600"
+                  className={`w-2 h-2 rounded-[100%] animate-pulse ${disponibility ? "bg-green-500" : "bg-orange-600"
                     }`}
                 ></div>
                 <p
-                  className={`${disponibility ? "text-green-600" : "text-red-500"
+                  className={`${disponibility ? "text-green-600" : "text-orange-600"
                     }`}
                 >
                   {disponibility
