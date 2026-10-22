@@ -1,16 +1,20 @@
 import { useEffect, useRef } from "react";
 
+const FRAME_MS = 50;
+
 export default function Donut() {
   const preRef = useRef(null);
 
   useEffect(() => {
+    const pre = preRef.current;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     let x = 1760,
       z = 0,
       y = 0;
-    let running = true;
 
     const render = () => {
-      if (!running) return;
       z += 0.07;
       y += 0.03;
       const a = [...new Array(x)].map((_, r) => (r % 80 === 79 ? "\n" : " "));
@@ -40,22 +44,49 @@ export default function Donut() {
           }
         }
       }
-      if (preRef.current) {
-        preRef.current.innerText = a.join("");
-      }
+      pre.textContent = a.join("");
     };
 
-    const interval = setInterval(render, 50);
+    render();
+    if (reducedMotion) return;
+
+    let rafId = null;
+    let lastFrame = 0;
+    let inView = false;
+
+    const loop = (now) => {
+      rafId = requestAnimationFrame(loop);
+      if (now - lastFrame < FRAME_MS) return;
+      lastFrame = now;
+      render();
+    };
+    const start = () => {
+      if (rafId === null) rafId = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+    const sync = () => (inView && !document.hidden ? start() : stop());
+
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    });
+    observer.observe(pre);
+    document.addEventListener("visibilitychange", sync);
 
     return () => {
-      running = false;
-      clearInterval(interval);
+      stop();
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", sync);
     };
   }, []);
 
   return (
     <pre
       ref={preRef}
+      aria-hidden="true"
       style={{
         color: "#fff",
         background: "transparent",

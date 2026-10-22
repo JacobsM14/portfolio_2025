@@ -1,36 +1,44 @@
-export default function LinkButton({ type = "link", link, children, onClick }) {
-  const EMAIL = "marcel.eplu@gmail.com";
+const buttonClass =
+  "p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary inline-flex items-center justify-center cursor-pointer";
 
-  const copyEmailToClipboard = async () => {
+export default function LinkButton({
+  type = "link",
+  link,
+  label,
+  children,
+  onClick,
+}) {
+  if (type !== "email") {
+    return (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={label}
+        title={label}
+        className={buttonClass}
+      >
+        {children}
+      </a>
+    );
+  }
+
+  const handleEmailClick = async () => {
     try {
-      await navigator.clipboard.writeText(EMAIL);
+      await navigator.clipboard.writeText(link.replace(/^mailto:/, ""));
+      onClick?.();
     } catch {
-      // Optionally, handle error here
-    }
-  };
-
-  const handleClick = () => {
-    if (type === "link") {
-      window.open(link);
-    } else if (type === "cv") {
-      window.open(link, "_blank");
-    } else if (type === "email") {
-      copyEmailToClipboard();
-    } else {
-      window.open(link);
-    }
-    
-    // Execute the additional onClick callback if provided
-    if (onClick) {
-      onClick();
+      window.location.href = link;
     }
   };
 
   return (
     <button
-      onClick={handleClick}
-      className="p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary"
-      style={{ cursor: "pointer" }}
+      type="button"
+      onClick={handleEmailClick}
+      aria-label={label}
+      title={label}
+      className={buttonClass}
     >
       {children}
     </button>

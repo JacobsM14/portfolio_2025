@@ -1,11 +1,12 @@
-export default function SpotifyLogo(width = "1em", height = "1em") {
+export default function SpotifyLogo({ width = "1em", height = "1em" }) {
   return (
     <div className="w-fit">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        length={width}
+        width={width}
         height={height}
         viewBox="0 0 32 32"
+        aria-hidden="true"
       >
         <path
           fill="currentColor"
