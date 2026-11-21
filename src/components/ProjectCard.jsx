@@ -1,9 +1,14 @@
 import TechBase from "./TechBase";
 import ExternalLinkIcon from "../assets/icons/ExternalLinkIcon";
 import GithubMarkIcon from "../assets/icons/GithubMarkIcon";
+import PlayStoreIcon from "../assets/icons/PlayStoreIcon";
 
-const LinkIcon = ({ label }) =>
-  label === "Web" ? <ExternalLinkIcon /> : <GithubMarkIcon />;
+const linkIcons = { Web: ExternalLinkIcon, "Play Store": PlayStoreIcon };
+
+const LinkIcon = ({ label }) => {
+  const Icon = linkIcons[label] ?? GithubMarkIcon;
+  return <Icon />;
+};
 
 export default function ProjectCard({
   project,

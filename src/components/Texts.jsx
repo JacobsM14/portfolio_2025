@@ -125,7 +125,18 @@ export const projects = [
     title: "Fort",
     featured: true,
     techs: ["React Native", "SQLite", "DrizzleORM", "Expo"],
-    links: [],
+    links: [
+      { label: "Web", url: "https://fort.marcel14.dev/" },
+      {
+        label: "Play Store",
+        url: "https://play.google.com/store/apps/details?id=com.marcelesplu.fort",
+      },
+      { label: "App", url: "https://github.com/JacobsM14/fort-mobile" },
+      {
+        label: "Landing",
+        url: "https://github.com/JacobsM14/fort-landing-page",
+      },
+    ],
   },
   {
     id: "portfolio",
@@ -185,7 +196,7 @@ const projectTexts = {
     },
     fort: {
       desc: "The mobile app version of Gymlogs: no API, mobile only.",
-      note: "Work in progress. The repository and the app are not public yet, but I'll publish them soon.",
+      note: "Published on Google Play. Both the app and its landing page are open source.",
     },
     portfolio: {
       desc: "My current portfolio, the site you are on. I built it after the CMD one because I wanted something simpler that works on every device. I still like the CMD one, though.",
@@ -213,7 +224,7 @@ const projectTexts = {
     },
     fort: {
       desc: "La versión de app móvil de Gymlogs: sin API, solo móvil.",
-      note: "En desarrollo. El repositorio y la app todavía no son públicos, pero los publicaré pronto.",
+      note: "Publicada en Google Play. Tanto la app como su landing son de código abierto.",
     },
     portfolio: {
       desc: "Mi portfolio actual, la web en la que estás. Lo hice después del de CMD porque quería algo más simple que funcione en cualquier dispositivo. Aun así, el de CMD me sigue gustando.",
