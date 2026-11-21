@@ -28,7 +28,7 @@ import {
   getLabel,
 } from "./components/Texts";
 
-const isAvailable = false;
+const isAvailable = true;
 
 // Module-level so the calendar gets a stable function reference on every render.
 const transformContributions = (contributions) =>
