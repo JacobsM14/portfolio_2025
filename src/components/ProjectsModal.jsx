@@ -20,11 +20,11 @@ export default function ProjectsModal({ open, onClose, language }) {
       aria-labelledby={titleId}
       onClose={onClose}
       onClick={(event) => event.target === event.currentTarget && onClose()}
-      className="sheet fixed p-0 overflow-hidden border-1 border-gray-normal bg-dark text-white open:flex open:flex-col
+      className="sheet fixed p-0 overflow-hidden border border-gray-normal bg-dark text-white open:flex open:flex-col
       inset-x-0 top-auto bottom-0 mx-auto mb-0 w-full max-w-none h-[90dvh] max-h-none rounded-t-3xl border-b-0
-      md:inset-0 md:m-auto md:w-[94vw] md:max-w-[1400px] xl:w-[85vw] md:h-fit md:max-h-[88dvh] md:rounded-3xl md:border-b-1 md:shadow-2xl md:shadow-black/60"
+      md:inset-0 md:m-auto md:w-[94vw] md:max-w-350 xl:w-[85vw] md:h-fit md:max-h-[88dvh] md:rounded-3xl md:border-b md:shadow-2xl md:shadow-black/60"
     >
-      <div className="shrink-0 flex items-center justify-between gap-4 px-4 py-3 md:px-6 border-b-1 border-gray-normal">
+      <div className="shrink-0 flex items-center justify-between gap-4 px-4 py-3 md:px-6 border-b border-gray-normal">
         <h2 id={titleId} className="text-white font-bold text-lg">
           {getLabel(language, "allProjects")}{" "}
           <span className="text-gray-light font-normal">
@@ -36,7 +36,7 @@ export default function ProjectsModal({ open, onClose, language }) {
           onClick={onClose}
           aria-label={getLabel(language, "close")}
           title={getLabel(language, "close")}
-          className="w-10 h-10 rounded-xl border-1 border-gray-normal flex items-center justify-center text-white cursor-pointer transition-colors hover:bg-primary"
+          className="w-10 h-10 rounded-xl border border-gray-normal flex items-center justify-center text-white cursor-pointer transition-colors hover:bg-primary"
         >
           <CloseIcon />
         </button>

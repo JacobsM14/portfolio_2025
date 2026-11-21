@@ -4,7 +4,7 @@ export default function SectionTitle({ icon: Icon, className = "", children }) {
       <span className="text-primary">
         <Icon />
       </span>
-      <h2 className="min-w-0 break-words text-white font-bold">{children}</h2>
+      <h2 className="min-w-0 wrap-break-word text-white font-bold">{children}</h2>
     </div>
   );
 }

@@ -66,13 +66,13 @@ function App() {
     <>
       <div className="w-full min-h-screen bg-dark flex items-center justify-center relative py-4 md:py-2">
         <div
-          className="w-[98vw] max-w-[1400px] grid grid-cols-1 grid-rows-none gap-4 p-2
+          className="w-[98vw] max-w-350 grid grid-cols-1 grid-rows-none gap-4 p-2
           xl:w-[85%]
           md:min-h-[85vh] md:grid-cols-9 md:grid-rows-9
         "
         >
           <div
-            className="col-span-1 row-span-1 bg-primary/5 border-1 border-gray-normal rounded-3xl flex items-center justify-between px-4 py-2 mb-2
+            className="col-span-1 row-span-1 bg-primary/5 border border-gray-normal rounded-3xl flex items-center justify-between px-4 py-2 mb-2
             md:col-span-9 md:row-span-1 md:px-8 md:py-0 md:mb-0
           "
           >
@@ -84,7 +84,7 @@ function App() {
             <div className="flex gap-2">
               <button
                 type="button"
-                className="w-10 h-10 bg-dark border-1 border-gray-normal rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300 cursor-pointer"
+                className="w-10 h-10 bg-dark border border-gray-normal rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300 cursor-pointer"
                 onClick={handleLanguageChange}
                 aria-label={t("changeLanguage")}
                 title={t("changeLanguage")}
@@ -99,7 +99,7 @@ function App() {
           "
           >
             <div
-              className="col-span-1 row-span-1 bg-primary/5 border-1 border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 p-4
+              className="col-span-1 row-span-1 bg-primary/5 border border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 p-4
               md:col-span-7 md:row-span-3 md:p-3 xl:p-0
             "
             >
@@ -126,7 +126,7 @@ function App() {
             "
             >
               <div
-                className="col-span-1 row-span-1 bg-dark border-1 border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 text-white mb-2 overflow-hidden
+                className="col-span-1 row-span-1 bg-dark border border-gray-normal rounded-3xl flex flex-col items-center justify-center gap-4 text-white mb-2 overflow-hidden
                 md:col-span-5 xl:col-span-6 md:row-span-1 md:mb-0
               "
               >
@@ -141,7 +141,7 @@ function App() {
                 </div>
               </div>
               <div
-                className="col-span-1 row-span-1 bg-gradient-to-b from-indigo-500/10 to-blue-500/10 border-1 border-gray-normal rounded-3xl flex flex-row items-center justify-center gap-2 mb-2
+                className="col-span-1 row-span-1 bg-linear-to-b from-indigo-500/10 to-blue-500/10 border border-gray-normal rounded-3xl flex flex-row items-center justify-center gap-2 mb-2
                 md:col-span-2 xl:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0 py-2
               "
               >
@@ -160,7 +160,7 @@ function App() {
                 ))}
               </div>
               <div
-                className="hidden md:flex col-span-1 row-span-1 border-1 rounded-3xl border-gray-normal bg-green-400/10 items-center justify-center text-white mt-2
+                className="hidden md:flex col-span-1 row-span-1 border rounded-3xl border-gray-normal bg-green-400/10 items-center justify-center text-white mt-2
                 md:col-span-5 xl:col-span-6 md:row-span-1 md:mt-0
               "
               >
@@ -168,20 +168,18 @@ function App() {
               </div>
             </div>
           </div>
-          {/* Projects (mobile) */}
           <ProjectsSection
             language={language}
             variant="strip"
             onShowAll={() => setProjectsOpen(true)}
-            className="flex md:hidden col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl overflow-hidden"
+            className="flex md:hidden col-span-1 row-span-1 border border-gray-normal rounded-3xl overflow-hidden"
           />
           <div
             className="col-span-1 row-span-1 flex flex-col gap-4
             md:col-span-6 md:row-span-2 md:grid md:grid-cols-6 xl:grid-cols-12 md:grid-rows-2 md:gap-4
           "
           >
-            {/* Technologies */}
-            <div className="col-span-1 row-span-1 h-fit border-1 border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-6 xl:row-span-2 md:row-span-2 md:h-[calc(100%)] overflow-hidden">
+            <div className="col-span-1 row-span-1 h-fit border border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-6 xl:row-span-2 md:row-span-2 md:h-[calc(100%)] overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
                 <SectionTitle icon={CodeIcon}>{t("technologies")}</SectionTitle>
                 <div className="flex flex-wrap gap-2 mt-4">
@@ -193,7 +191,7 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="col-span-1 row-span-2 border-1 border-gray-normal rounded-3xl p-4 md:col-span-2 xl:col-span-3 md:row-span-2 overflow-hidden">
+            <div className="col-span-1 row-span-2 border border-gray-normal rounded-3xl p-4 md:col-span-2 xl:col-span-3 md:row-span-2 overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
                 <SectionTitle icon={ToolsIcon}>{t("tools")}</SectionTitle>
                 <div className="flex flex-wrap gap-2 mt-4">
@@ -206,7 +204,7 @@ function App() {
               </div>
             </div>
             <div
-              className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4
+              className="col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4
               md:col-span-1 md:row-span-2 md:hidden xl:block xl:col-span-3
             "
             >
@@ -227,7 +225,7 @@ function App() {
           "
           >
             <div
-              className={`col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${
+              className={`col-span-1 row-span-1 border border-gray-normal rounded-3xl p-2 flex flex-col items-center justify-center ${
                 isAvailable ? "bg-green-400/10" : ""
               } md:col-span-3 md:row-span-2`}
             >
@@ -249,7 +247,7 @@ function App() {
                 {isAvailable ? t("availableDesc") : t("busyDesc")}
               </p>
             </div>
-            <div className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 xl:p-3 2xl:p-4 md:col-span-3 md:row-span-5">
+            <div className="col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4 xl:p-3 2xl:p-4 md:col-span-3 md:row-span-5">
               <SectionTitle icon={PreferencesIcon}>
                 {t("preferences")}
               </SectionTitle>
@@ -264,12 +262,12 @@ function App() {
                 ))}
               </div>
             </div>
-            <div className="hidden md:flex col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl overflow-hidden  items-center justify-center md:col-span-3 md:row-span-3">
+            <div className="hidden md:flex col-span-1 row-span-1 border border-gray-normal rounded-3xl overflow-hidden  items-center justify-center md:col-span-3 md:row-span-3">
               <Donut />
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4
+            className="col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4
             md:col-span-4 md:row-span-3 xl:col-span-2 2xl:col-span-3 xl:row-span-3
           "
           >
@@ -290,12 +288,12 @@ function App() {
             </div>
           </div>
           <div
-            className="col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 bg-gradient-to-br from-indigo-500/10 to-purple-500/10
+            className="col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4 bg-linear-to-br from-indigo-500/10 to-purple-500/10
             md:col-span-2 md:row-span-3 xl:col-span-2 2xl:col-span-1 xl:row-span-3
           "
           >
             <SectionTitle icon={StudiesIcon}>{t("studies")}</SectionTitle>
-            <div className="mt-4 flex flex-col overflow-y-auto h-[calc(100%-2rem)] break-words">
+            <div className="mt-4 flex flex-col overflow-y-auto h-[calc(100%-2rem)] wrap-break-word">
               {getStudies(language).map((study) => (
                 <div key={study.degree} className="mb-2 text-xs">
                   <p className="text-white font-bold">{study.degree}</p>
@@ -305,15 +303,14 @@ function App() {
               ))}
             </div>
           </div>
-          {/* Projects (desktop) */}
           <ProjectsSection
             language={language}
             variant="block"
             onShowAll={() => setProjectsOpen(true)}
-            className="hidden md:flex col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden"
+            className="hidden md:flex col-span-1 row-span-1 border border-gray-normal rounded-3xl md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden"
           />
           <div
-            className="hidden col-span-1 row-span-1 border-1 border-gray-normal rounded-3xl p-4 bg-gradient-to-br from-orange-500/10 to-yellow-500/10
+            className="hidden col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4 bg-linear-to-br from-orange-500/10 to-yellow-500/10
             md:col-span-2 md:row-span-3 md:hidden xl:block xl:col-span-2 xl:row-span-3 overflow-hidden
           "
           >

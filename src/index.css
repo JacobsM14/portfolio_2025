@@ -65,7 +65,6 @@ html:has(dialog[open]) {
 
 @media (width >= 48rem) {
   .sheet {
-    /* centred: half the viewport plus half its own height puts it just below the screen */
     --sheet-from: calc(50dvh + 50%);
   }
 }

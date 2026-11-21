@@ -8,6 +8,7 @@ import SonataAMinorPanigni from "../assets/songs/sonata_a_minor_panigni.webp";
 import IAmTheAntichristToYou from "../assets/songs/i_am_the_antichrist_to_you.webp";
 import MoneyForNothing from "../assets/songs/money_for_nothing.webp";
 import Bossanova from "../assets/songs/bossanova.webp";
+
 const songs = [
   {
     title: "Sea of Dreams",

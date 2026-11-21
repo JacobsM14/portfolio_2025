@@ -1,5 +1,5 @@
 const buttonClass =
-  "p-2 rounded-lg border-1 border-gray-normal text-white bg-black hover:bg-primary inline-flex items-center justify-center cursor-pointer";
+  "p-2 rounded-lg border border-gray-normal text-white bg-black hover:bg-primary inline-flex items-center justify-center cursor-pointer";
 
 export default function LinkButton({
   type = "link",

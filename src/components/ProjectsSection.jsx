@@ -39,7 +39,7 @@ export default function ProjectsSection({
             type="button"
             onClick={onShowAll}
             aria-haspopup="dialog"
-            className="w-28 shrink-0 p-2 rounded-lg border-1 border-dashed border-gray-normal text-primary text-sm font-bold text-center flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors hover:border-primary hover:bg-primary/10"
+            className="w-28 shrink-0 p-2 rounded-lg border border-dashed border-gray-normal text-primary text-sm font-bold text-center flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors hover:border-primary hover:bg-primary/10"
           >
             <GridIcon />
             <span>{getLabel(language, "seeAllProjects")}</span>
