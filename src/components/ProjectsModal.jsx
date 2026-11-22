@@ -1,12 +1,16 @@
 import { useEffect, useId, useRef } from "react";
-import ProjectCard from "./ProjectCard";
-import CloseIcon from "../assets/icons/CloseIcon";
-import { getLabel, getProjects } from "./Texts";
+import { useTranslation } from "react-i18next";
+import { getProjects } from "../data/projects";
 
-export default function ProjectsModal({ open, onClose, language }) {
+import ProjectCard from "./ProjectCard";
+
+import CloseIcon from "../assets/icons/CloseIcon";
+
+export default function ProjectsModal({ open, onClose }) {
+  const { t } = useTranslation();
   const dialogRef = useRef(null);
   const titleId = useId();
-  const projects = getProjects(language);
+  const projects = getProjects(t("projects", { returnObjects: true }));
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -26,7 +30,7 @@ export default function ProjectsModal({ open, onClose, language }) {
     >
       <div className="shrink-0 flex items-center justify-between gap-4 px-4 py-3 md:px-6 border-b border-gray-normal">
         <h2 id={titleId} className="text-white font-bold text-lg">
-          {getLabel(language, "allProjects")}{" "}
+          {t("labels.allProjects")}{" "}
           <span className="text-gray-light font-normal">
             ({projects.length})
           </span>
@@ -34,8 +38,8 @@ export default function ProjectsModal({ open, onClose, language }) {
         <button
           type="button"
           onClick={onClose}
-          aria-label={getLabel(language, "close")}
-          title={getLabel(language, "close")}
+          aria-label={t("labels.close")}
+          title={t("labels.close")}
           className="w-10 h-10 rounded-xl border border-gray-normal flex items-center justify-center text-white cursor-pointer transition-colors hover:bg-primary"
         >
           <CloseIcon />

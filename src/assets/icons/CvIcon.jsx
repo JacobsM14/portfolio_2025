@@ -1,10 +1,15 @@
-export default function CvIcon() {
+export default function CvIcon({
+  className = "",
+  width = "1em",
+  height = "1em",
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
+      width={width}
+      height={height}
       viewBox="0 0 512 512"
+      className={className}
     >
       <path
         fill="currentColor"

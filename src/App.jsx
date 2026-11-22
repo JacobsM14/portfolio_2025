@@ -1,8 +1,7 @@
-import "./index.css";
-import GitHubCalendar from "react-github-calendar";
+import { GitHubCalendar } from "react-github-calendar";
 import { useEffect, useMemo, useState } from "react";
+import Header from "./components/Header";
 import Spotify from "./components/Spotify";
-import getBook, { bookCount } from "./components/Books";
 import LinkButton from "./components/LinkButton";
 import { socials } from "./assets/icons/SocialIcons";
 import TechBase from "./components/TechBase";
@@ -18,49 +17,36 @@ import PreferencesIcon from "./assets/icons/PreferencesIcon";
 import ExperienceIcon from "./assets/icons/ExperienceIcon";
 import StudiesIcon from "./assets/icons/StudiesIcon";
 import { selectLastHalfYear } from "./utils/selectLastHalfYear";
-import {
-  technologies,
-  tools,
-  getPreferences,
-  getLanguages,
-  getExperiences,
-  getStudies,
-  getLabel,
-} from "./components/Texts";
+import { technologies, tools } from "./data/profile";
+import { books, getBook } from "./data/books";
+import { useTranslation } from "react-i18next";
 
 const isAvailable = true;
 
-// Module-level so the calendar gets a stable function reference on every render.
 const transformContributions = (contributions) =>
   selectLastHalfYear(contributions);
 
 function App() {
-  const [language, setLanguage] = useState("en");
-  const [bookIndex] = useState(() => Math.floor(Math.random() * bookCount));
-  const [mailCopied, setMailCopied] = useState(false);
+  const { t } = useTranslation();
+  const [bookIndex] = useState(() => Math.floor(Math.random() * books.length));
+  const [mailCopiedAt, setMailCopiedAt] = useState(0);
+  const mailCopied = mailCopiedAt > 0;
   const [projectsOpen, setProjectsOpen] = useState(false);
 
-  const t = (key) => getLabel(language, key);
-  const book = getBook(language, bookIndex);
+  const book = getBook(t("books", { returnObjects: true }), bookIndex);
+
   const calendarLabels = useMemo(
-    () => ({ totalCount: getLabel(language, "contributions") }),
-    [language],
+    () => ({
+      totalCount: t("labels.contributions", { skipInterpolation: true }),
+    }),
+    [t],
   );
 
-  const handleLanguageChange = () => {
-    setLanguage((prevLanguage) => (prevLanguage === "es" ? "en" : "es"));
-  };
-
   useEffect(() => {
-    document.documentElement.lang = language;
-  }, [language]);
-
-  useEffect(() => {
-    if (mailCopied) {
-      const timer = setTimeout(() => setMailCopied(false), 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [mailCopied]);
+    if (!mailCopiedAt) return;
+    const timer = setTimeout(() => setMailCopiedAt(0), 3000);
+    return () => clearTimeout(timer);
+  }, [mailCopiedAt]);
 
   return (
     <>
@@ -71,28 +57,7 @@ function App() {
           md:min-h-[85vh] md:grid-cols-9 md:grid-rows-9
         "
         >
-          <div
-            className="col-span-1 row-span-1 bg-primary/5 border border-gray-normal rounded-3xl flex items-center justify-between px-4 py-2 mb-2
-            md:col-span-9 md:row-span-1 md:px-8 md:py-0 md:mb-0
-          "
-          >
-            <div>
-              <h1 className="text-2xl sm:text-3xl font-bold text-primary">
-                Marcel Portfolio
-              </h1>
-            </div>
-            <div className="flex gap-2">
-              <button
-                type="button"
-                className="w-10 h-10 bg-dark border border-gray-normal rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300 cursor-pointer"
-                onClick={handleLanguageChange}
-                aria-label={t("changeLanguage")}
-                title={t("changeLanguage")}
-              >
-                {language === "es" ? "ES" : "EN"}
-              </button>
-            </div>
-          </div>
+          <Header />
           <div
             className="col-span-1 row-span-1 flex flex-col gap-4
             md:col-span-3 md:row-span-8 md:grid md:grid-cols-7 md:grid-rows-6 md:gap-4
@@ -113,11 +78,13 @@ function App() {
               </h2>
               <p className="text-gray-light">Full Stack Developer</p>
               <p className="text-white text-center w-[90%] md:text-sm">
-                {t("userDesc")}
+                {t("labels.userDesc")}
               </p>
               <div className="flex items-center justify-center gap-2 text-gray-light">
                 <LocationIcon />
-                <p className="text-gray-light">Barcelona, {t("country")}</p>
+                <p className="text-gray-light">
+                  Barcelona, {t("labels.country")}
+                </p>
               </div>
             </div>
             <div
@@ -134,9 +101,9 @@ function App() {
                   <GitHubCalendar
                     username="JacobsM14"
                     transformData={transformContributions}
-                    hideColorLegend
+                    showColorLegend={false}
                     labels={calendarLabels}
-                    errorMessage={t("calendarError")}
+                    errorMessage={t("labels.calendarError")}
                   />
                 </div>
               </div>
@@ -152,7 +119,7 @@ function App() {
                     label={social.label}
                     key={key}
                     {...(social.type === "email"
-                      ? { onClick: () => setMailCopied(true) }
+                      ? { onClick: () => setMailCopiedAt(Date.now()) }
                       : {})}
                   >
                     <social.icon />
@@ -164,12 +131,11 @@ function App() {
                 md:col-span-5 xl:col-span-6 md:row-span-1 md:mt-0
               "
               >
-                <Spotify language={language} />
+                <Spotify />
               </div>
             </div>
           </div>
           <ProjectsSection
-            language={language}
             variant="strip"
             onShowAll={() => setProjectsOpen(true)}
             className="flex md:hidden col-span-1 row-span-1 border border-gray-normal rounded-3xl overflow-hidden"
@@ -181,7 +147,9 @@ function App() {
           >
             <div className="col-span-1 row-span-1 h-fit border border-gray-normal rounded-3xl p-4 md:col-span-4 xl:col-span-6 xl:row-span-2 md:row-span-2 md:h-[calc(100%)] overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
-                <SectionTitle icon={CodeIcon}>{t("technologies")}</SectionTitle>
+                <SectionTitle icon={CodeIcon}>
+                  {t("labels.technologies")}
+                </SectionTitle>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {technologies.map((tech) => (
                     <TechBase paddings={"px-3 py-1"} key={tech}>
@@ -193,7 +161,9 @@ function App() {
             </div>
             <div className="col-span-1 row-span-2 border border-gray-normal rounded-3xl p-4 md:col-span-2 xl:col-span-3 md:row-span-2 overflow-hidden">
               <div className="flex flex-col overflow-y-auto h-full">
-                <SectionTitle icon={ToolsIcon}>{t("tools")}</SectionTitle>
+                <SectionTitle icon={ToolsIcon}>
+                  {t("labels.tools")}
+                </SectionTitle>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {tools.map((tool) => (
                     <TechBase paddings={"px-3 py-1"} key={tool}>
@@ -208,9 +178,11 @@ function App() {
               md:col-span-1 md:row-span-2 md:hidden xl:block xl:col-span-3
             "
             >
-              <SectionTitle icon={LanguagesIcon}>{t("languages")}</SectionTitle>
+              <SectionTitle icon={LanguagesIcon}>
+                {t("labels.languages")}
+              </SectionTitle>
               <div className="flex flex-col gap-2 mt-4">
-                {getLanguages(language).map((lang) => (
+                {t("languages", { returnObjects: true }).map((lang) => (
                   <div key={lang.language} className="flex gap-2 items-center">
                     <div className="w-1 h-1 shrink-0 bg-primary rounded-full"></div>
                     <span className="text-white pl-2">{lang.language}</span>
@@ -240,19 +212,19 @@ function App() {
                     isAvailable ? "text-green-600" : "text-orange-600"
                   }`}
                 >
-                  {isAvailable ? t("available") : t("busy")}
+                  {isAvailable ? t("labels.available") : t("labels.busy")}
                 </p>
               </div>
               <p className="text-gray-light text-sm text-center">
-                {isAvailable ? t("availableDesc") : t("busyDesc")}
+                {isAvailable ? t("labels.availableDesc") : t("labels.busyDesc")}
               </p>
             </div>
             <div className="col-span-1 row-span-1 border border-gray-normal rounded-3xl p-4 xl:p-3 2xl:p-4 md:col-span-3 md:row-span-5">
               <SectionTitle icon={PreferencesIcon}>
-                {t("preferences")}
+                {t("labels.preferences")}
               </SectionTitle>
               <div className="flex flex-col gap-2 mt-4">
-                {getPreferences(language).map((preference) => (
+                {t("preferences", { returnObjects: true }).map((preference) => (
                   <div key={preference} className="flex gap-2 items-center">
                     <div className="w-1 h-1 shrink-0 bg-primary rounded-full"></div>
                     <span className="text-white text-sm pl-2">
@@ -272,10 +244,10 @@ function App() {
           "
           >
             <SectionTitle icon={ExperienceIcon}>
-              {t("experiences")}
+              {t("labels.experiences")}
             </SectionTitle>
             <div className="mt-4 grid grid-cols-[repeat(auto-fit,minmax(11rem,1fr))] gap-x-4 content-start">
-              {getExperiences(language).map((exp) => (
+              {t("experiences", { returnObjects: true }).map((exp) => (
                 <div
                   key={exp.company}
                   className="mb-2 border-l-2 border-primary p-2 text-sm"
@@ -292,9 +264,11 @@ function App() {
             md:col-span-2 md:row-span-3 xl:col-span-2 2xl:col-span-1 xl:row-span-3
           "
           >
-            <SectionTitle icon={StudiesIcon}>{t("studies")}</SectionTitle>
+            <SectionTitle icon={StudiesIcon}>
+              {t("labels.studies")}
+            </SectionTitle>
             <div className="mt-4 flex flex-col overflow-y-auto h-[calc(100%-2rem)] wrap-break-word">
-              {getStudies(language).map((study) => (
+              {t("studies", { returnObjects: true }).map((study) => (
                 <div key={study.degree} className="mb-2 text-xs">
                   <p className="text-white font-bold">{study.degree}</p>
                   <p className="text-gray-light">{study.institution}</p>
@@ -304,7 +278,6 @@ function App() {
             </div>
           </div>
           <ProjectsSection
-            language={language}
             variant="block"
             onShowAll={() => setProjectsOpen(true)}
             className="hidden md:flex col-span-1 row-span-1 border border-gray-normal rounded-3xl md:col-span-6 md:row-span-3 xl:col-span-4 xl:row-span-3 overflow-hidden"
@@ -315,7 +288,9 @@ function App() {
           "
           >
             <div className="overflow-y-auto h-full">
-              <h2 className="text-white font-bold">{t("recentReading")}</h2>
+              <h2 className="text-white font-bold">
+                {t("labels.recentReading")}
+              </h2>
               <div className="flex items-center py-4 gap-3">
                 <img
                   src={book.cover}
@@ -333,7 +308,7 @@ function App() {
           </div>
         </div>
         <div role="status" className="sr-only">
-          {mailCopied ? t("mailCopied") : ""}
+          {mailCopied ? t("labels.mailCopied") : ""}
         </div>
         <div
           aria-hidden="true"
@@ -343,12 +318,11 @@ function App() {
               : "opacity-0 translate-y-10 pointer-events-none"
           }`}
         >
-          <p>{t("mailCopied")}</p>
+          <p>{t("labels.mailCopied")}</p>
         </div>
         <ProjectsModal
           open={projectsOpen}
           onClose={() => setProjectsOpen(false)}
-          language={language}
         />
       </div>
     </>

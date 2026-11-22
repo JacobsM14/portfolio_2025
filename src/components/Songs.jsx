@@ -4,7 +4,7 @@ import SmalltownBoy from "../assets/songs/smalltown_boy.webp";
 import VeridisQuo from "../assets/songs/veridis_quo.webp";
 import Bloom from "../assets/songs/bloom.webp";
 import DontStopMeNow from "../assets/songs/dont_stop_me_now.webp";
-import SonataAMinorPanigni from "../assets/songs/sonata_a_minor_panigni.webp";
+import SonataAMinorPaganini from "../assets/songs/sonata_a_minor_paganini.webp";
 import IAmTheAntichristToYou from "../assets/songs/i_am_the_antichrist_to_you.webp";
 import MoneyForNothing from "../assets/songs/money_for_nothing.webp";
 import Bossanova from "../assets/songs/bossanova.webp";
@@ -49,7 +49,7 @@ const songs = [
   {
     title: "Sonata in A Minor",
     artist: "Niccolò Paganini",
-    image: SonataAMinorPanigni,
+    image: SonataAMinorPaganini,
     link: "https://open.spotify.com/track/0Z8N2t2ESzixtZAOOiQYEu",
   },
   {

@@ -1,8 +1,6 @@
-import CV from "../cv.pdf";
 import GithubIcon from "./GithubIcon";
 import LinkedinIcon from "./LinkedinIcon";
 import EmailIcon from "./EmailIcon";
-import CvIcon from "./CvIcon";
 import GoodreadsIcon from "./GoodreadsIcon";
 import SteamIcon from "./SteamIcon";
 
@@ -24,12 +22,6 @@ export const socials = {
     link: "mailto:marcel.esplu@gmail.com",
     type: "email",
     icon: EmailIcon,
-  },
-  cv: {
-    label: "CV",
-    link: CV,
-    type: "cv",
-    icon: CvIcon,
   },
   goodreads: {
     label: "Goodreads",

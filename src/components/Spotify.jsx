@@ -1,9 +1,12 @@
 import { useState } from "react";
-import getSong, { songCount } from "./Songs";
-import SpotifyLogo from "../assets/SpotfyLogo";
-import { getLabel } from "./Texts";
+import { useTranslation } from "react-i18next";
 
-export default function Spotify({ language }) {
+import getSong, { songCount } from "./Songs";
+
+import SpotifyLogo from "../assets/SpotifyLogo";
+
+export default function Spotify() {
+  const { t } = useTranslation();
   const [songIndex] = useState(() => Math.floor(Math.random() * songCount));
   const song = getSong(songIndex);
 
@@ -24,9 +27,7 @@ export default function Spotify({ language }) {
       <div className="flex items-center justify-between gap-10 w-full xl:w-fit min-w-0 p-2">
         <div className="flex flex-col items-center text-center xl:items-start xl:text-left xl:ml-4 w-full min-w-0">
           <div className="flex items-center justify-center xl:justify-start gap-2 mb-2 w-full">
-            <p className="w-fit text-sm">
-              {getLabel(language, "recentlyPlayed")}
-            </p>
+            <p className="w-fit text-sm">{t("labels.recentlyPlayed")}</p>
             <SpotifyLogo />
           </div>
           <p className="text-lg font-bold">{song.title}</p>
