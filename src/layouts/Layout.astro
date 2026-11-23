@@ -11,13 +11,25 @@ import {
 } from "../i18n/utils";
 import "../styles/global.css";
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(lang);
-const title = t("meta.title");
-const description = t("meta.description");
+
+const { title = t("meta.title"), description = t("meta.description") } =
+  Astro.props;
 
 const path = pathWithoutLocale(Astro.url.pathname, lang);
-const canonical = new URL(Astro.url.pathname, Astro.site);
+
+// The 404 page answers every missing URL, so it has no address of its own to point to.
+const isNotFound = Astro.routePattern === "/404";
+const canonical = isNotFound
+  ? undefined
+  : new URL(Astro.url.pathname, Astro.site);
+
 const ogImage = new URL("/og-image.png", Astro.site);
 const otherLangs = (Object.keys(languages) as Lang[]).filter(
   (code) => code !== lang,
@@ -69,25 +81,29 @@ const person = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Marcel Esplugas Jacobo" />
-    <link rel="canonical" href={canonical} />
     {
-      Object.keys(languages).map((code) => (
-        <link
-          rel="alternate"
-          hreflang={code}
-          href={getAbsoluteLocaleUrl(code, path)}
-        />
-      ))
+      canonical && (
+        <>
+          <link rel="canonical" href={canonical} />
+          {Object.keys(languages).map((code) => (
+            <link
+              rel="alternate"
+              hreflang={code}
+              href={getAbsoluteLocaleUrl(code, path)}
+            />
+          ))}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={getAbsoluteLocaleUrl(defaultLang, path)}
+          />
+        </>
+      )
     }
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={getAbsoluteLocaleUrl(defaultLang, path)}
-    />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Marcel Esplugas Jacobo" />
-    <meta property="og:url" content={canonical} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />

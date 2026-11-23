@@ -59,5 +59,11 @@
   "books.noLongerHuman.title": "Indigno de Ser Humano",
   "books.heartOfDarkness.title": "El Corazón de las Tinieblas",
   "books.childhoodsEnd.title": "El Fin de la Infancia",
-  "books.clockworkOrange.title": "La Naranja Mecánica"
+  "books.clockworkOrange.title": "La Naranja Mecánica",
+  "notFound.metaTitle": "Página no encontrada · Marcel Esplugas Jacobo",
+  "notFound.eyebrow": "Error 404",
+  "notFound.title": "Esta página no existe.",
+  "notFound.description": "Puede que el enlace esté roto o que la página se haya movido. Vuelve al portfolio y sigue donde lo dejaste.",
+  "notFound.cta": "Volver al portfolio",
+  "notFound.otherLanguage": "¿Buscas la versión en español? Ir al portfolio"
 }

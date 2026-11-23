@@ -19,6 +19,13 @@
 /* Laptops and desktops: the whole page fits the viewport, without scroll */
 @custom-variant desktop (@media (width >= 64rem) and (height >= 37.5rem));
 
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
 html {
   color-scheme: dark;
 }

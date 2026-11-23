@@ -59,5 +59,11 @@
   "books.noLongerHuman.title": "No Longer Human",
   "books.heartOfDarkness.title": "Heart of Darkness",
   "books.childhoodsEnd.title": "Childhood's End",
-  "books.clockworkOrange.title": "A Clockwork Orange"
+  "books.clockworkOrange.title": "A Clockwork Orange",
+  "notFound.metaTitle": "Page not found · Marcel Esplugas Jacobo",
+  "notFound.eyebrow": "Error 404",
+  "notFound.title": "This page doesn't exist.",
+  "notFound.description": "The link may be broken or the page may have moved. Head back to the portfolio and pick up where you left off.",
+  "notFound.cta": "Back to the portfolio",
+  "notFound.otherLanguage": "Looking for the English version? Go to the portfolio"
 }

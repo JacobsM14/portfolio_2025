@@ -1,0 +1,48 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  getLang,
+  languages,
+  useTranslations,
+  type Lang,
+} from "../i18n/utils";
+import ButtonLink from "./ui/ButtonLink.astro";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const otherLanguages = (Object.keys(languages) as Lang[]).filter(
+  (code) => code !== lang,
+);
+---
+
+<main
+  class="mx-auto flex min-h-dvh w-full max-w-350 flex-col items-start justify-center gap-7 px-4 py-16 md:px-12"
+>
+  <p class="eyebrow text-primary">
+    {t("notFound.eyebrow")}
+  </p>
+  <h1
+    class="max-w-2xl text-5xl leading-[1.05] font-bold text-white md:text-6xl"
+  >
+    {t("notFound.title")}
+  </h1>
+  <p class="max-w-xl text-[19px] text-gray-light">
+    {t("notFound.description")}
+  </p>
+  <ButtonLink href={getRelativeLocaleUrl(lang)} class="mt-2">
+    {t("notFound.cta")}
+  </ButtonLink>
+  {
+    otherLanguages.map((code) => (
+      <a
+        href={getRelativeLocaleUrl(code)}
+        hreflang={code}
+        lang={code}
+        class="text-sm text-gray-light underline-offset-4 transition-colors hover:text-primary hover:underline"
+      >
+        {useTranslations(code)("notFound.otherLanguage")}
+      </a>
+    ))
+  }
+</main>
