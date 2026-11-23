@@ -28,6 +28,10 @@ export function getLang(locale: string | undefined): Lang {
   return isLang(locale) ? locale : defaultLang;
 }
 
+export function isUIKey(key: string): key is UIKey {
+  return key in ui[defaultLang];
+}
+
 export function useTranslations(lang: string | undefined) {
   const dict: Partial<Record<UIKey, string>> = ui[getLang(lang)];
   return (key: UIKey) => dict[key] ?? ui[defaultLang][key];
