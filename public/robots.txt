@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://marcel14.dev/sitemap.xml
+Sitemap: https://marcel14.dev/sitemap-index.xml

@@ -1,0 +1,23 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLang, useTranslations } from "../i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const otherLang = lang === "en" ? "es" : "en";
+---
+
+<main
+  class="min-h-screen flex flex-col items-center justify-center gap-4 text-white"
+>
+  <h1 class="text-3xl font-bold text-primary">{t("labels.headerTitle")}</h1>
+  <a
+    href={getRelativeLocaleUrl(otherLang)}
+    hreflang={otherLang}
+    aria-label={`${lang.toUpperCase()} – ${t("labels.changeLanguage")}`}
+    title={t("labels.changeLanguage")}
+    class="w-10 h-10 bg-dark border border-gray-normal rounded-xl flex items-center justify-center hover:scale-110 transition-transform duration-300"
+  >
+    {lang.toUpperCase()}
+  </a>
+</main>
