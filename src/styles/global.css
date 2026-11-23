@@ -16,8 +16,19 @@
   }
 }
 
+/* Laptops and desktops: the whole page fits the viewport, without scroll */
+@custom-variant desktop (@media (width >= 64rem) and (height >= 37.5rem));
+
 html {
   color-scheme: dark;
+}
+
+/* Everything is in rem, so the UI scales with the viewport height:
+   12px at 550px tall or less, 16px at 950px or more */
+@media (width >= 64rem) and (height >= 37.5rem) {
+  html {
+    font-size: clamp(12px, 6.5px + 1vh, 16px);
+  }
 }
 
 /* Standard scrollbar styling (Firefox, Chrome 121+) */
