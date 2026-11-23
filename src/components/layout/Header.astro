@@ -1,0 +1,45 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLang, useTranslations } from "../../i18n/utils";
+import CvIcon from "../../assets/icons/cv.svg";
+import cv from "../../assets/cv.pdf";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(lang);
+const otherLang = lang === "en" ? "es" : "en";
+const languageCode = lang.toUpperCase();
+---
+
+<header class:list={["flex items-center justify-between gap-2", className]}>
+  <a
+    href={cv}
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label={t("labels.viewCv")}
+    title={t("labels.viewCv")}
+    class="shrink-0 h-full min-h-14 aspect-square bg-primary/5 border border-gray-normal rounded-3xl flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-colors duration-300"
+  >
+    <CvIcon width="2em" height="2em" />
+  </a>
+  <div
+    class="flex-1 h-full bg-primary/5 border border-gray-normal rounded-3xl flex items-center justify-between px-4 py-2 md:px-8 md:py-0"
+  >
+    <h1 class="text-2xl sm:text-3xl font-bold text-primary">
+      {t("labels.headerTitle")}
+    </h1>
+    <a
+      href={getRelativeLocaleUrl(otherLang)}
+      hreflang={otherLang}
+      aria-label={`${languageCode} – ${t("labels.changeLanguage")}`}
+      title={t("labels.changeLanguage")}
+      class="w-10 h-10 bg-dark border border-gray-normal rounded-xl flex items-center justify-center text-white hover:scale-110 transition-transform duration-300"
+    >
+      {languageCode}
+    </a>
+  </div>
+</header>
