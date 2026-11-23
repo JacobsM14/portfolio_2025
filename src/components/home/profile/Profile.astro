@@ -1,0 +1,39 @@
+---
+import { useTranslations } from "../../../i18n/utils";
+import Card from "../../ui/Card.astro";
+import LocationIcon from "../../../assets/icons/location.svg";
+
+interface Props {
+  class?: string;
+}
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Card
+  class:list={[
+    "bg-primary/5 flex flex-col items-center justify-center gap-4 p-4",
+    Astro.props.class,
+  ]}
+>
+  <div
+    class="w-22 h-22 rounded-full bg-primary/30 flex items-center justify-center"
+  >
+    <div
+      class="bg-primary w-20 h-20 rounded-full flex items-center justify-center"
+    >
+      <p class="text-3xl font-bold text-white">ME</p>
+    </div>
+  </div>
+  <h2 class="text-white text-xl font-bold text-center">
+    Marcel Esplugas Jacobo
+  </h2>
+  <p class="text-gray-light">Full Stack Developer</p>
+  <p class="text-white text-center w-[90%] md:text-sm">
+    {t("labels.userDesc")}
+  </p>
+  <div class="flex items-center justify-center gap-2 text-gray-light">
+    <LocationIcon />
+    <p>Barcelona, {t("labels.country")}</p>
+  </div>
+</Card>

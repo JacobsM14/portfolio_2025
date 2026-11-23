@@ -1,0 +1,96 @@
+---
+import Card from "../../ui/Card.astro";
+
+interface Props {
+  class?: string;
+}
+---
+
+<Card
+  class:list={[
+    "overflow-hidden items-center justify-center",
+    Astro.props.class,
+  ]}
+>
+  <pre
+    data-donut
+    aria-hidden="true"
+    class="m-0 p-0 font-mono text-[4px] leading-1 text-white select-none pointer-events-none"
+  ></pre>
+</Card>
+
+<script>
+  const FRAME_MS = 50;
+  const pre = document.querySelector<HTMLPreElement>("[data-donut]")!;
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  ).matches;
+
+  const size = 1760;
+  let z = 0;
+  let y = 0;
+
+  const render = () => {
+    z += 0.07;
+    y += 0.03;
+    const output: string[] = [...new Array(size)].map((_, r) =>
+      r % 80 === 79 ? "\n" : " ",
+    );
+    const depth = new Array(size).fill(0);
+    const t = Math.cos(z),
+      e = Math.sin(z),
+      n = Math.cos(y),
+      o = Math.sin(y);
+    for (let s = 0; s < 6.28; s += 0.07) {
+      const c = Math.cos(s),
+        h = Math.sin(s);
+      for (let s2 = 0; s2 < 6.28; s2 += 0.02) {
+        const v = Math.sin(s2),
+          M = Math.cos(s2),
+          i = c + 2,
+          l = 1 / (v * i * e + h * t + 5),
+          p = v * i * t - h * e,
+          d = 0 | (40 + 30 * l * (M * i * n - p * o)),
+          m = 0 | (12 + 15 * l * (M * i * o + p * n)),
+          f =
+            0 |
+            (8 * ((h * e - v * c * t) * n - v * c * e - h * t - M * c * o)),
+          index = d + 80 * m;
+        if (m < 22 && m >= 0 && d >= 0 && d < 79 && l > depth[index]) {
+          depth[index] = l;
+          output[index] = ".,-~:;=!*#$@"[f > 0 ? f : 0];
+        }
+      }
+    }
+    pre.textContent = output.join("");
+  };
+
+  render();
+
+  if (!reducedMotion) {
+    let rafId: number | null = null;
+    let lastFrame = 0;
+    let inView = false;
+
+    const loop = (now: number) => {
+      rafId = requestAnimationFrame(loop);
+      if (now - lastFrame < FRAME_MS) return;
+      lastFrame = now;
+      render();
+    };
+    const start = () => {
+      if (rafId === null) rafId = requestAnimationFrame(loop);
+    };
+    const stop = () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
+      rafId = null;
+    };
+    const sync = () => (inView && !document.hidden ? start() : stop());
+
+    new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      sync();
+    }).observe(pre);
+    document.addEventListener("visibilitychange", sync);
+  }
+</script>

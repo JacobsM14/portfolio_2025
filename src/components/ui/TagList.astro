@@ -1,0 +1,26 @@
+---
+interface Props {
+  items: readonly string[];
+  size?: "sm" | "md";
+  class?: string;
+}
+
+const { items, size = "md", class: className } = Astro.props;
+---
+
+<ul
+  class:list={["flex flex-wrap", size === "md" ? "gap-2 desktop:gap-1" : "gap-1", className]}
+>
+  {
+    items.map((item) => (
+      <li
+        class:list={[
+          "bg-gray-light/40 text-white font-bold rounded-full",
+          size === "md" ? "text-sm px-3 py-1 desktop:py-0.5" : "text-xs px-2 py-1 desktop:py-0.5",
+        ]}
+      >
+        {item}
+      </li>
+    ))
+  }
+</ul>

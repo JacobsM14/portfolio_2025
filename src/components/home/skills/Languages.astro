@@ -1,0 +1,22 @@
+---
+import { useTranslations } from "../../../i18n/utils";
+import { languages } from "../../../data/profile";
+import Card from "../../ui/Card.astro";
+import SectionTitle from "../../ui/SectionTitle.astro";
+import BulletList from "../../ui/BulletList.astro";
+import LanguagesIcon from "../../../assets/icons/languages.svg";
+
+interface Props {
+  class?: string;
+}
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Card class:list={["p-4 desktop:p-3 flex flex-col", Astro.props.class]}>
+  <SectionTitle icon={LanguagesIcon}>{t("labels.languages")}</SectionTitle>
+  <BulletList
+    items={languages.map((language) => t(`languages.${language}`))}
+    class="mt-4 desktop:mt-2 min-h-0 overflow-y-auto"
+  />
+</Card>

@@ -1,0 +1,85 @@
+---
+import { isUIKey, useTranslations } from "../../../i18n/utils";
+import type { projects } from "../../../data/projects";
+import TagList from "../../ui/TagList.astro";
+import ExternalLinkIcon from "../../../assets/icons/external-link.svg";
+import GithubMarkIcon from "../../../assets/icons/github-mark.svg";
+import PlayStoreIcon from "../../../assets/icons/play-store.svg";
+
+interface Props {
+  project: (typeof projects)[number];
+  variant?: "compact" | "full";
+  class?: string;
+}
+
+const { project, variant = "full", class: className } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+
+const desc = t(`projects.${project.id}.desc`);
+const noteKey = `projects.${project.id}.note`;
+const note = isUIKey(noteKey) ? t(noteKey) : undefined;
+
+const linkIcons: Record<string, typeof GithubMarkIcon> = {
+  Web: ExternalLinkIcon,
+  "Play Store": PlayStoreIcon,
+};
+const links = project.links.map((link) => ({
+  ...link,
+  name: `${project.title} — ${link.label}`,
+  Icon: linkIcons[link.label] ?? GithubMarkIcon,
+}));
+---
+
+{
+  variant === "compact" ? (
+    <article
+      class:list={["text-sm p-2 border border-gray-normal rounded-lg", className]}
+    >
+      <div class="flex items-center justify-between gap-2">
+        <h3 class="text-white font-bold">{project.title}</h3>
+        <div class="flex items-center gap-2">
+          {links.map(({ url, name, Icon }) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={name}
+              title={name}
+              class="text-primary flex items-center gap-1"
+            >
+              <Icon />
+            </a>
+          ))}
+        </div>
+      </div>
+      <p class="text-gray-light my-4 desktop:my-2 line-clamp-3">{desc}</p>
+      <TagList items={project.techs} size="sm" />
+    </article>
+  ) : (
+    <article
+      class:list={[
+        "text-sm p-3 border border-gray-normal rounded-xl flex flex-col gap-3",
+        className,
+      ]}
+    >
+      <h3 class="text-white font-bold text-base">{project.title}</h3>
+      <TagList items={project.techs} size="sm" />
+      <p class="text-gray-light">{desc}</p>
+      {note && <p class="text-gray-light italic">{note}</p>}
+      <div class="flex flex-wrap gap-2 mt-auto pt-1">
+        {links.map(({ url, label, name, Icon }) => (
+          <a
+            href={url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={name}
+            class="inline-flex items-center gap-1 px-2 py-1 rounded-full border border-gray-normal text-primary hover:bg-primary hover:text-white transition-colors"
+          >
+            <Icon />
+            {label}
+          </a>
+        ))}
+      </div>
+    </article>
+  )
+}

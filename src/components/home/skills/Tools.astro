@@ -1,0 +1,21 @@
+---
+import { useTranslations } from "../../../i18n/utils";
+import { tools } from "../../../data/profile";
+import Card from "../../ui/Card.astro";
+import SectionTitle from "../../ui/SectionTitle.astro";
+import TagList from "../../ui/TagList.astro";
+import ToolsIcon from "../../../assets/icons/tools.svg";
+
+interface Props {
+  class?: string;
+}
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<Card class:list={["p-4 desktop:p-3 overflow-hidden", Astro.props.class]}>
+  <div class="flex flex-col overflow-y-auto h-full">
+    <SectionTitle icon={ToolsIcon}>{t("labels.tools")}</SectionTitle>
+    <TagList items={tools} class="mt-4 desktop:mt-2" />
+  </div>
+</Card>

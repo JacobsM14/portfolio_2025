@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7c3aed;
+  --color-primary-light: #a78bfa;
+  --color-dark: #09090b;
+  --color-gray-normal: #27272a;
+  --color-gray-light: #999999;
+
+  --animate-vinyl: vinyl-spin 10s linear infinite;
+
+  @keyframes vinyl-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Laptops and desktops: the whole page fits the viewport, without scroll */
+@custom-variant desktop (@media (width >= 64rem) and (height >= 37.5rem));
+
+html {
+  color-scheme: dark;
+}
+
+/* Everything is in rem, so the UI scales with the viewport height:
+   12px at 550px tall or less, 16px at 950px or more */
+@media (width >= 64rem) and (height >= 37.5rem) {
+  html {
+    font-size: clamp(12px, 6.5px + 1vh, 16px);
+  }
+}
+
+/* Standard scrollbar styling (Firefox, Chrome 121+) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-light) var(--color-gray-normal);
+}
+
+/* WebKit fallback (Safari) */
+@supports not (scrollbar-width: thin) {
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: var(--color-gray-normal);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: var(--color-gray-light);
+    border-radius: 4px;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary-light);
+  }
+}
+
+body {
+  background-color: var(--color-dark);
+}
+
+/* No page scroll behind an open modal (mobile / short screens) */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+.sheet {
+  --sheet-from: 100%;
+  translate: 0 var(--sheet-from);
+  transition:
+    translate 300ms ease-out,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+}
+
+@media (width >= 48rem) {
+  .sheet {
+    --sheet-from: calc(50dvh + 50%);
+  }
+}
+
+.sheet[open] {
+  translate: 0 0;
+}
+
+.sheet::backdrop {
+  background-color: rgb(0 0 0 / 0);
+  transition:
+    background-color 300ms ease-out,
+    overlay 300ms allow-discrete,
+    display 300ms allow-discrete;
+}
+
+.sheet[open]::backdrop {
+  background-color: rgb(0 0 0 / 0.6);
+}
+
+@starting-style {
+  .sheet[open] {
+    translate: 0 var(--sheet-from);
+  }
+
+  .sheet[open]::backdrop {
+    background-color: rgb(0 0 0 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet,
+  .sheet::backdrop {
+    transition: none;
+  }
+}

@@ -1,0 +1,17 @@
+---
+import type { SvgComponent } from "astro/types";
+
+interface Props {
+  icon: SvgComponent;
+  class?: string;
+}
+
+const { icon: Icon, class: className } = Astro.props;
+---
+
+<div class:list={["flex gap-3 items-center", className]}>
+  <span class="text-primary"><Icon /></span>
+  <h2 class="min-w-0 wrap-break-word text-white font-bold">
+    <slot />
+  </h2>
+</div>
