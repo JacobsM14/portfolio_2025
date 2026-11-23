@@ -24,10 +24,5 @@ export const books = [
     author: "Anthony Burgess",
     cover: LaNaranjaMecanica,
   },
-];
+] as const;
 
-export function getBook(texts, index) {
-  const book = books[index];
-
-  return { ...book, ...texts[book.id] };
-}

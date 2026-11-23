@@ -72,8 +72,5 @@ export const projects = [
       { label: "GitHub", url: "https://github.com/JacobsM14/MediumFreeOnly" },
     ],
   },
-];
+] as const;
 
-export function getProjects(texts) {
-  return projects.map((project) => ({ ...project, ...texts[project.id] }));
-}
