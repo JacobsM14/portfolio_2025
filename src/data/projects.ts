@@ -47,15 +47,7 @@ export const projects = [
     title: "Gymlogs",
     techs: ["React", "Tailwind", "axios", "Bun", "Vite", "MySQL"],
     links: [
-      { label: "Web", url: "https://www.gymlogs.marcel14.dev/" },
-      {
-        label: "Frontend",
-        url: "https://github.com/JacobsM14/GYMLOGS_FRONTEND",
-      },
-      {
-        label: "Backend",
-        url: "https://github.com/JacobsM14/GYMLOGS_BACKEND",
-      },
+      { label: "GitHub", url: "https://github.com/JacobsM14/gymlogs" },
     ],
   },
   {
