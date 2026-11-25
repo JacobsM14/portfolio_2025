@@ -4,21 +4,23 @@ export const isAvailable = true;
 
 export const technologies = [
   "React",
-  "Node.js",
-  "Express",
-  "MySQL",
+  "React Native",
+  "JavaScript",
   "TypeScript",
   "Tailwind CSS",
-  "Docker",
-  "Git",
-  "JavaScript",
-  "HTML",
-  "CSS",
+  "NodeJs",
+  "Express",
+  "MySQL",
   "C++",
   "Java",
+  "Go",
+  "API Rest",
+  "AI",
+  "Docker",
+  "Git",
 ];
 
-export const tools = ["VS Code", "Postman", "GitHub", "Figma", "Jira"];
+export const tools = ["VS Code", "DBeaver", "Postman", "GitHub", "Figma", "Jira"];
 
 export const languages = ["es", "ca", "en"] as const;
 
@@ -26,18 +28,20 @@ export const preferences = [
   "hybrid",
   "remote",
   "frontend",
+  "backend",
+  "fullstack",
   "junior",
   "partTime",
   "fullTime",
 ] as const;
 
 export const experiences = [
-  { id: "sagradaFamilia", company: "Escola Sagrada Familia" },
-  { id: "infinitum", company: "Infinitum Projects" },
   { id: "fundraisers", company: "Fundraisers" },
+  { id: "infinitum", company: "Infinitum Projects" },
+  { id: "sagradaFamilia", company: "Escola Sagrada Familia" },
 ] as const;
 
 export const studies = [
-  { id: "smx", institution: "Jaume Viladoms", years: "2020 - 2022" },
   { id: "daw", institution: "Jaume Viladoms", years: "2022 - 2024" },
+  { id: "smx", institution: "Jaume Viladoms", years: "2020 - 2022" },
 ] as const;

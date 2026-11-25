@@ -30,6 +30,8 @@
   "preferences.hybrid": "Hybrid",
   "preferences.remote": "Remote",
   "preferences.frontend": "Frontend",
+  "preferences.backend": "Backend",
+  "preferences.fullstack": "Fullstack",
   "preferences.junior": "Junior",
   "preferences.partTime": "Part-time",
   "preferences.fullTime": "Full-time",
