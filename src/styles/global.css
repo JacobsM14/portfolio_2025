@@ -6,6 +6,7 @@
   --color-dark: #09090b;
   --color-gray-normal: #27272a;
   --color-gray-light: #999999;
+  --color-white: #f0f0f0;
 
   --animate-vinyl: vinyl-spin 10s linear infinite;
 
@@ -28,6 +29,9 @@
 
 html {
   color-scheme: dark;
+}
+p{
+
 }
 
 /* Everything is in rem, so the UI scales with the viewport height:

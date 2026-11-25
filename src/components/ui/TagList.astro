@@ -15,7 +15,7 @@ const { items, size = "md", class: className } = Astro.props;
     items.map((item) => (
       <li
         class:list={[
-          "bg-gray-light/40 text-white font-bold rounded-full",
+          "bg-gray-light/20 text-white/80 font-bold rounded-full",
           size === "md" ? "text-sm px-3 py-1 desktop:py-0.5" : "text-xs px-2 py-1 desktop:py-0.5",
         ]}
       >
