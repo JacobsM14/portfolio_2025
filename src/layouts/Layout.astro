@@ -78,6 +78,15 @@ const person = {
       src="https://analytics.arcedo.dev/script.js"
       data-website-id="73f03824-7e23-47d6-90aa-631a056638e2"
     ></script>
+    {
+      !isNotFound && (
+        <link
+          rel="preconnect"
+          href="https://github-contributions-api.jogruber.de"
+          crossorigin
+        />
+      )
+    }
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Marcel Esplugas Jacobo" />

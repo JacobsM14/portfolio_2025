@@ -27,6 +27,7 @@
   "labels.allProjects": "Todos los proyectos",
   "labels.close": "Cerrar",
   "labels.calendarError": "No se pudo cargar la actividad de GitHub.",
+  "labels.calendarLoading": "Cargando actividad de GitHub…",
   "preferences.hybrid": "Híbrido",
   "preferences.remote": "Remoto",
   "preferences.frontend": "Frontend",

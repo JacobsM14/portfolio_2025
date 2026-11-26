@@ -2,7 +2,6 @@ const SHOWN_MONTHS = 6;
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
-// Keeps the current month and the previous (SHOWN_MONTHS - 1), also across a year boundary.
 export function selectLastHalfYear<T extends { date: string }>(
   contributions: T[],
   now = new Date(),

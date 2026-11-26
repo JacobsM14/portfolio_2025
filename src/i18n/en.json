@@ -27,6 +27,7 @@
   "labels.allProjects": "All projects",
   "labels.close": "Close",
   "labels.calendarError": "Couldn't load GitHub activity right now.",
+  "labels.calendarLoading": "Loading GitHub activity…",
   "preferences.hybrid": "Hybrid",
   "preferences.remote": "Remote",
   "preferences.frontend": "Frontend",
