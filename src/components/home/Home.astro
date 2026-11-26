@@ -31,8 +31,8 @@ const t = useTranslations(Astro.currentLocale);
 
     <div class="flex flex-col gap-4 desktop:gap-3 md:col-span-3 md:row-span-8 md:grid md:grid-cols-7 md:grid-rows-6">
       <Profile class="md:col-span-7 md:row-span-3 md:p-3 xl:p-0" />
-      <div class="flex flex-col gap-4 desktop:gap-3 md:col-span-7 md:row-span-3 md:grid md:grid-cols-7">
-        <Card class="bg-dark flex flex-col items-center justify-center gap-4 desktop:gap-3 text-white mb-2 overflow-hidden md:col-span-5 xl:col-span-6 md:mb-0 desktop:@container-size">
+      <div class="flex flex-col gap-4 desktop:gap-3 md:col-span-7 md:row-span-3 md:grid md:grid-cols-[minmax(0,1fr)_auto] md:grid-rows-2">
+        <Card class="bg-dark flex flex-col items-center justify-center gap-4 desktop:gap-3 text-white mb-2 overflow-hidden md:mb-0 desktop:@container-size">
           <div class="w-full px-3">
             <GithubActivity
               client:visible
@@ -42,8 +42,8 @@ const t = useTranslations(Astro.currentLocale);
             />
           </div>
         </Card>
-        <Socials class="flex-row mb-2 md:col-span-2 xl:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0" />
-        <Card class="hidden md:flex bg-green-400/10 items-center justify-center text-white md:col-span-5 xl:col-span-6 desktop:@container-size">
+        <Socials class="flex-row mb-2 md:row-span-2 md:flex-col md:gap-4 md:mb-0" />
+        <Card class="hidden md:flex bg-green-400/10 items-center justify-center text-white desktop:@container-size">
           <NowPlaying label={t("labels.recentlyPlayed")} songs={songs} />
         </Card>
       </div>
