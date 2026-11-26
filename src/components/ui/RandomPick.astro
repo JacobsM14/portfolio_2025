@@ -1,0 +1,8 @@
+<div class="contents"><slot /></div>
+<script is:inline>
+  {
+    const items = [...document.currentScript.previousElementSibling.children];
+    const pick = items[Math.floor(Math.random() * items.length)];
+    for (const item of items) item.hidden = item !== pick;
+  }
+</script>

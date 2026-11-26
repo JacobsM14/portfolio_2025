@@ -12,7 +12,7 @@ import Socials from "./profile/Socials.astro";
 import Projects from "./projects/Projects.astro";
 import ProjectsModal from "./projects/ProjectsModal.astro";
 import Technologies from "./skills/Technologies.astro";
-import NowPlaying from "./extras/NowPlaying";
+import NowPlaying from "./extras/NowPlaying.astro";
 import Tools from "./skills/Tools.astro";
 import Languages from "./skills/Languages.astro";
 import Availability from "./availability/Availability.astro";
@@ -20,7 +20,7 @@ import Preferences from "./availability/Preferences.astro";
 import Experiences from "./career/Experiences.astro";
 import Studies from "./career/Studies.astro";
 import Donut from "./extras/Donut.astro";
-import RecentBook from "./extras/RecentBook";
+import RecentBook from "./extras/RecentBook.astro";
 
 const t = useTranslations(Astro.currentLocale);
 ---
@@ -33,21 +33,18 @@ const t = useTranslations(Astro.currentLocale);
       <Profile class="md:col-span-7 md:row-span-3 md:p-3 xl:p-0" />
       <div class="flex flex-col gap-4 desktop:gap-3 md:col-span-7 md:row-span-3 md:grid md:grid-cols-7">
         <Card class="bg-dark flex flex-col items-center justify-center gap-4 desktop:gap-3 text-white mb-2 overflow-hidden md:col-span-5 xl:col-span-6 md:mb-0 desktop:@container-size">
-          <div class="w-full px-3 [&_svg]:w-full [&_svg]:h-auto desktop:[&_svg]:max-h-[calc(100cqh-3rem)]">
+          <div class="w-full px-3">
             <GithubActivity
-              client:only="react"
+              client:visible
               totalCountLabel={t("labels.contributions")}
+              loadingLabel={t("labels.calendarLoading")}
               errorMessage={t("labels.calendarError")}
             />
           </div>
         </Card>
         <Socials class="flex-row mb-2 md:col-span-2 xl:col-span-1 md:row-span-2 md:flex-col md:gap-4 md:mb-0" />
         <Card class="hidden md:flex bg-green-400/10 items-center justify-center text-white md:col-span-5 xl:col-span-6 desktop:@container-size">
-          <NowPlaying
-            client:only="react"
-            label={t("labels.recentlyPlayed")}
-            songs={songs.map((song) => ({ ...song, image: song.image.src }))}
-          />
+          <NowPlaying label={t("labels.recentlyPlayed")} songs={songs} />
         </Card>
       </div>
     </div>
@@ -72,11 +69,10 @@ const t = useTranslations(Astro.currentLocale);
       <div class="@container flex flex-col h-full">
         <h2 class="text-white font-bold">{t("labels.recentReading")}</h2>
         <RecentBook
-          client:only="react"
           books={books.map((book) => ({
             title: t(`books.${book.id}.title`),
             author: book.author,
-            cover: book.cover.src,
+            cover: book.cover,
           }))}
         />
       </div>

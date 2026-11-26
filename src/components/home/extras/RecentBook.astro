@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+import RandomPick from "../../ui/RandomPick.astro";
+
+interface Book {
+  title: string;
+  author: string;
+  cover: ImageMetadata;
+}
+
+interface Props {
+  books: Book[];
+}
+
+const { books } = Astro.props;
+---
+
+<RandomPick>
+  {
+    books.map((book, index) => (
+      <div
+        hidden={index > 0}
+        class="flex-1 min-h-0 flex flex-col @min-[240px]:flex-row @min-[240px]:items-center py-4 desktop:py-3 gap-3"
+      >
+        <Image
+          src={book.cover}
+          alt={book.title}
+          width={240}
+          class="flex-1 min-h-0 max-h-45 w-auto max-w-30 self-start object-contain rounded-lg @min-[240px]:flex-none @min-[240px]:h-full @min-[240px]:self-center"
+        />
+        <div class="flex flex-col">
+          <p class="text-white text-md font-bold pb-2">{book.title}</p>
+          <p class="text-gray-light pb-1">{book.author}</p>
+        </div>
+      </div>
+    ))
+  }
+</RandomPick>
