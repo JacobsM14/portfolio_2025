@@ -26,8 +26,8 @@ A single-screen, bento-style portfolio: on laptops and desktops everything fits 
 
 - [Astro](https://astro.build) – static pages, one per language
 - [Tailwind CSS 4](https://tailwindcss.com) – styling
-- [React 19](https://react.dev) – only for three client-side islands: the GitHub calendar, the song and the book
-- [react-github-calendar](https://github.com/grubersjoe/react-github-calendar) – contribution graph
+- [React 19](https://react.dev) – only for one client-side island: the GitHub calendar
+- [react-activity-calendar](https://github.com/grubersjoe/react-activity-calendar) – contribution graph, with data from the [GitHub contributions API](https://github.com/grubersjoe/github-contributions-api)
 - [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/) – sitemap with `hreflang` alternates
 - Native `<dialog>` element – projects modal
 - TypeScript, checked with `astro check`
