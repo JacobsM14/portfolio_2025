@@ -6,6 +6,7 @@ import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://marcel14.dev",
+  build: { inlineStylesheets: "always" },
   integrations: [
     react(),
     sitemap({
