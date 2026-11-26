@@ -22,14 +22,14 @@ const { label, songs } = Astro.props;
     songs.map((song, index) => (
       <div
         hidden={index > 0}
-        class="flex flex-col xl:flex-row items-center w-full xl:w-fit min-w-0 p-4 desktop:p-3 gap-2 xl:gap-0"
+        class="flex flex-col xl:flex-row items-center w-full min-w-0 p-4 desktop:p-3 gap-2 xl:gap-0"
       >
         <div class="w-16 desktop:max-xl:w-12 shrink-0 xl:w-[37%] desktop:max-w-[calc(100cqh-2.5rem)] bg-gray-600 flex items-center justify-center rounded-xl p-2 relative overflow-hidden">
           <div class="w-1 h-[50%] bg-white top-0 right-2 rotate-30 absolute z-20 rounded-md shadow-[0_4px_16px_rgba(0,0,0,0.25)]" />
           <Image
             src={song.image}
             alt={`${song.title} - ${song.artist}`}
-            class="rounded-full motion-safe:animate-vinyl shadow-[0_4px_16px_rgba(0,0,0,1)]"
+            class="aspect-square object-cover rounded-full motion-safe:animate-vinyl shadow-[0_4px_16px_rgba(0,0,0,1)]"
           />
         </div>
         <div class="flex flex-col items-center text-center xl:items-start xl:text-left xl:ml-4 w-full xl:w-fit min-w-0 p-2 desktop:p-1">
